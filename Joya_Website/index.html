@@ -1,0 +1,2964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JOYA Mark XXXIX — Human AI Companion</title>
+<meta name="description" content="JOYA Mark XXXIX is a premium local AI companion with voice, vision, study tools, memory, and safe PC control. Download free or unlock Pro lifetime.">
+<meta name="theme-color" content="#06070b">
+<meta property="og:title" content="JOYA Mark XXXIX — Human AI Companion">
+<meta property="og:description" content="A private, local AI that sees your screen, remembers your world, studies with you, and controls your PC with permission.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;450;500;600;700&family=Inter:wght@400;450;500;600;700;800&family=Sora:wght@500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ── Base · deep Apple/Tesla obsidian pitch black ── */
+  --bg: #000000;
+  --bg-2: #050506;
+  --panel: #0b0b0d;
+  --panel2: #121215;
+  --surface: #18181c;
+  --surface-hi: rgba(255, 255, 255, 0.04);
+}
+
+#pricing, #buy {
+  display: none !important;
+}
+
+:root {
+
+  /* ── Text · refined label hierarchy ── */
+  --ink: #ffffff;
+  --muted: #86868b;
+  --soft: #6e6e73;
+  --faint: #333336;
+
+  /* ── Hairlines ── */
+  --line: rgba(255,255,255,.05);
+  --line2: rgba(255,255,255,.1);
+  --line3: rgba(255,255,255,.18);
+
+  /* ── Tesla/Apple accents · silver metal → space gray → cybertruck cyan ── */
+  --blue: #2997ff;
+  --indigo: #515154;
+  --indigo-2: #333336;
+  --violet: #86868b;
+  --orchid: #a1a1a6;
+  --green: #30d158;
+  --amber: #ff9f0a;
+  --gold: #d4af37;
+  --pink: #ff375f;
+  --cyan: #2997ff;
+  --silver: #f5f5f7;
+
+  /* Premium gradients */
+  --grad-brand: linear-gradient(135deg, #ffffff 0%, #a1a1a6 50%, #515154 100%);
+  --grad-brand-soft: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  --grad-sheen: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+
+  /* ── Typography · Apple-style clean system ── */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Segoe UI", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Segoe UI", sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+
+  /* ── Geometry ── */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --ease-out-expo: cubic-bezier(0.15, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.25, 1.4, 0.5, 1);
+
+  /* ── Elevation ── */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.6);
+  --shadow-md: 0 4px 18px rgba(0,0,0,.7);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.85);
+  --shadow-glow: 0 0 50px rgba(41, 151, 255, 0.12), 0 10px 40px rgba(0,0,0,.8);
+  --shadow-brand: 0 12px 36px rgba(255,255,255,.1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(1200px 700px at 78% -8%, rgba(124,120,255,.10), transparent 60%),
+    radial-gradient(1000px 620px at 12% 8%, rgba(192,132,252,.07), transparent 58%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv05" 1, "ss01" 1, "cv11" 1;
+  letter-spacing: -0.005em;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+.wrap { width: min(1200px, calc(100% - 48px)); margin: 0 auto; }
+
+/* Premium custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(124,120,255,.2); border-radius: 999px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: rgba(124,120,255,.35); }
+
+/* Cinematic grain overlay */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: .032; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Ambient dot grid pattern */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .028;
+  background-image: radial-gradient(rgba(124,120,255,.5) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Progress bar ── */
+#progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 60;
+  background: linear-gradient(90deg, var(--indigo), var(--violet), var(--cyan));
+  box-shadow: 0 0 20px rgba(124,120,255,.5); transition: width .1s linear;
+}
+
+/* ── Navigation ── */
+nav {
+  position: fixed; inset: 0 0 auto; z-index: 50; height: 60px;
+  background: rgba(6,7,11,.72);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  backdrop-filter: saturate(200%) blur(24px);
+  -webkit-backdrop-filter: saturate(200%) blur(24px);
+  transition: border-color .4s, box-shadow .4s, background .4s;
+}
+nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; font-family: var(--font-display); }
+.brand-mark {
+  width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center;
+  color: #fff; font-size: 14px; font-weight: 800;
+  background: linear-gradient(145deg, #eeeef0 0%, #7c78ff 50%, var(--violet) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 8px 24px rgba(124,120,255,.3);
+  transition: transform .3s var(--ease-spring), box-shadow .3s;
+}
+.brand:hover .brand-mark { transform: scale(1.08) rotate(-4deg); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 12px 32px rgba(124,120,255,.4); }
+.navlinks { display: flex; align-items: center; gap: 26px; color: var(--muted); font-size: 13px; font-weight: 550; letter-spacing: .01em; }
+.navlinks a { transition: color .25s, transform .2s; position: relative; }
+.navlinks a::after { content: ''; position: absolute; bottom: -4px; left: 50%; width: 0; height: 1.5px; background: var(--indigo); border-radius: 999px; transition: width .3s var(--ease-out-expo), left .3s var(--ease-out-expo); }
+.navlinks a:hover { color: var(--ink); transform: translateY(-1px); }
+.navlinks a:hover::after { width: 100%; left: 0; }
+.nav-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 34px; padding: 0 18px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; font-size: 12.5px; font-weight: 700; letter-spacing: .02em;
+  box-shadow: 0 8px 20px rgba(124,120,255,.25); transition: all .25s var(--ease-out-expo);
+}
+.nav-cta:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 12px 28px rgba(124,120,255,.35); }
+.nav-user { display: flex; align-items: center; gap: 10px; }
+.nav-admin {
+  font-size: 10.5px; font-weight: 800; color: #d8b4fe; background: rgba(192,132,252,.1);
+  border: 1px solid rgba(192,132,252,.2); padding: 5px 14px; border-radius: 999px; letter-spacing: 0.05em;
+  transition: all .25s;
+}
+.nav-admin:hover { background: rgba(192,132,252,.18); border-color: rgba(192,132,252,.35); }
+.user-chip {
+  display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: var(--silver);
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); padding: 5px 14px; border-radius: 999px;
+  transition: all .2s;
+}
+.user-chip:hover { background: rgba(255,255,255,.07); }
+.user-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
+.nav-logout {
+  cursor: pointer; font-size: 12px; font-weight: 700; color: var(--muted); background: transparent;
+  border: 1px solid rgba(255,255,255,.06); padding: 5px 14px; border-radius: 999px; transition: all .25s;
+  letter-spacing: .01em;
+}
+.nav-logout:hover { color: #fff; border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.04); }
+
+@media(max-width:920px) { .navlinks { display: none; } }
+
+/* ── Hero Section ── */
+.hero {
+  position: relative; min-height: 100vh; display: grid; align-items: center; overflow: hidden;
+  padding: 88px 0 46px;
+}
+#stage3d { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; pointer-events: none; }
+.hero::after {
+  content: ""; position: absolute; inset: auto 0 0; height: 32vh; z-index: 1;
+  background: linear-gradient(180deg, rgba(6,7,11,0), var(--bg)); pointer-events: none;
+}
+.hero-copy {
+  position: relative; z-index: 2; max-width: 900px; padding-top: 4vh;
+  margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--silver); font-size: 13px; font-weight: 700; margin-bottom: 20px; letter-spacing: .06em; text-transform: uppercase;
+}
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 18px var(--green); animation: pulseGreen 2.5s ease-in-out infinite; }
+@keyframes pulseGreen { 0%,100%{ box-shadow: 0 0 18px var(--green); } 50%{ box-shadow: 0 0 28px var(--green), 0 0 6px var(--green); } }
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 13vw, 168px);
+  line-height: .86; letter-spacing: -0.045em; font-weight: 700;
+}
+.hero h1 span {
+  display: block; color: transparent;
+  background: linear-gradient(110deg, #ffffff 0%, #e9e6ff 24%, #9c98ff 52%, #d8b4fe 76%, #7be8c4 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  font-style: normal;
+}
+.hero-sub {
+  max-width: 720px; margin-top: 28px;
+  color: var(--muted); font-size: clamp(17px, 2.2vw, 22px); font-weight: 450; line-height: 1.65;
+}
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; justify-content: center; }
+.btn {
+  min-height: 50px; border: none; border-radius: 999px; padding: 0 30px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer; font-weight: 600; font-size: 14px; letter-spacing: .005em;
+  font-family: var(--font-sans);
+  transition: all .3s var(--ease-out-expo);
+  will-change: transform, box-shadow;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(.98); transition-duration: .1s; }
+.btn-primary {
+  position: relative; overflow: hidden;
+  background: var(--grad-brand); color: #fff;
+  box-shadow: var(--shadow-brand), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.btn-primary:hover { box-shadow: 0 18px 50px rgba(124,120,255,.48), 0 2px 10px rgba(192,132,252,.3), inset 0 1px 0 rgba(255,255,255,.2); }
+.btn-primary::after {
+  content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.38), transparent);
+  transform: skewX(-20deg); animation: shine 6s ease-in-out infinite;
+}
+@keyframes shine { 0%, 65% { left: -120% } 100% { left: 150% } }
+.btn-secondary { background: rgba(255,255,255,.05); color: var(--ink); border: 1px solid var(--line2); backdrop-filter: blur(8px); }
+.btn-secondary:hover { background: rgba(255,255,255,.09); border-color: var(--line3); box-shadow: var(--shadow-md); }
+.btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+.hero-meta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 12.5px; font-weight: 650; justify-content: center; }
+.pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 30px; padding: 0 13px; border-radius: 999px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+  transition: all .25s;
+}
+.pill:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.1); }
+.scroll-hint { position: absolute; z-index: 2; left: 50%; bottom: 18px; transform: translateX(-50%); font-size: 11.5px; color: var(--soft); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; animation: scrollHintPulse 2.5s ease-in-out infinite; }
+@keyframes scrollHintPulse { 0%,100%{ opacity: .5; } 50%{ opacity: 1; } }
+
+/* ── Fallback Orb ── */
+.orb-fallback { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; pointer-events: none; }
+@media(min-width:860px) { .orb-fallback { justify-items: end; padding-right: 9%; } }
+.orb { position: relative; width: min(44vw,400px); height: min(44vw,400px); }
+.orb-core {
+  position: absolute; inset: 32%; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c9c6ff, var(--indigo) 45%, var(--violet) 100%);
+  box-shadow: 0 0 80px rgba(110,106,255,.55), 0 0 150px rgba(191,90,242,.35), inset 0 6px 20px rgba(255,255,255,.5);
+  animation: orbPulse 5s ease-in-out infinite;
+}
+.orb-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid transparent; }
+.orb-ring.r1 { border-top-color: rgba(110,106,255,.7); border-left-color: rgba(110,106,255,.2); animation: orbSpin 8s linear infinite; }
+.orb-ring.r2 { inset: 9%; border-bottom-color: rgba(191,90,242,.6); border-right-color: rgba(191,90,242,.2); animation: orbSpin 12s linear infinite reverse; }
+.orb-ring.r3 { inset: 18%; border-top-color: rgba(100,210,255,.6); animation: orbSpin 16s linear infinite; }
+@keyframes orbSpin { to { transform: rotate(360deg); } }
+@keyframes orbPulse { 0%,100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.05); filter: brightness(1.15); } }
+
+/* ── Scrolling band ── */
+.marquee {
+  position: relative; z-index: 3; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.01); padding: 18px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track { display: inline-flex; align-items: center; gap: 26px; white-space: nowrap; will-change: transform; animation: marq 24s linear infinite; }
+.marquee-track span { font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: .2em; color: var(--silver); opacity: .8; }
+.marquee-track i { color: var(--indigo); font-style: normal; }
+@keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── Main Sections ── */
+section { position: relative; padding: 128px 0; }
+.section-head { max-width: 820px; margin-bottom: 56px; }
+.section-head.center { text-align: center; margin-left: auto; margin-right: auto; }
+.kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 18px;
+  color: var(--violet);
+  padding: 6px 13px 6px 11px; border-radius: 999px;
+  background: var(--grad-brand-soft); border: 1px solid rgba(192,132,252,.2);
+}
+.kicker::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 10px var(--violet); }
+h2 { font-family: var(--font-display); font-size: clamp(36px, 5.5vw, 74px); letter-spacing: -0.038em; line-height: .96; font-weight: 700; }
+.section-head p { margin-top: 20px; color: var(--muted); font-size: 19px; font-weight: 450; line-height: 1.7; }
+
+.showcase { display: grid; grid-template-columns: 1.05fr .95fr; gap: 32px; align-items: center; }
+.product-shot {
+  min-height: 520px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line);
+  background: radial-gradient(circle at 30% 20%, rgba(110,106,255,.24), transparent 34%),
+              radial-gradient(circle at 75% 70%, rgba(191,90,242,.15), transparent 32%), #08090d;
+  position: relative; transform-style: preserve-3d; perspective: 1200px;
+}
+.laptop {
+  position: absolute; left: 8%; right: 8%; top: 16%; bottom: 16%;
+  transform: rotateX(7deg) rotateY(-12deg) translateZ(20px);
+  border-radius: 20px; background: #0e0f14; border: 1px solid var(--line2);
+  box-shadow: 0 45px 100px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);
+  padding: 14px;
+}
+.screen {
+  height: 100%; border-radius: 12px; background: #07080c; border: 1px solid rgba(255,255,255,.08);
+  padding: 16px; overflow: hidden; display: flex; flex-direction: column; position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.screen-top {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.05); padding-bottom: 10px; margin-bottom: 12px;
+}
+.sys-title { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 11px; letter-spacing: 0.05em; font-weight: 700; }
+.status-indicator {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 10px var(--green); animation: pulseIndicator 2s infinite;
+}
+@keyframes pulseIndicator { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+.sys-stats { font-size: 9.5px; color: var(--soft); display: flex; gap: 10px; letter-spacing: 0.02em; font-weight: 600; }
+.glow-txt-green { color: var(--green); text-shadow: 0 0 6px rgba(52,211,153,.3); }
+.glow-txt-cyan { color: var(--cyan); text-shadow: 0 0 6px rgba(103,232,249,.3); }
+
+.screen-workspace { display: flex; flex: 1; gap: 12px; height: calc(100% - 35px); }
+.screen-sidebar { width: 32px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid rgba(255,255,255,.05); padding-right: 10px; }
+.side-btn {
+  width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center;
+  color: var(--soft); cursor: pointer; transition: all .25s var(--ease-out-expo); border: 1px solid transparent;
+}
+.side-btn:hover { color: var(--ink); background: rgba(255,255,255,.04); }
+.side-btn.active { color: var(--indigo); background: rgba(124,120,255,.1); border-color: rgba(124,120,255,.15); }
+.side-btn svg { width: 12px; height: 12px; }
+
+.screen-main { flex: 1; display: flex; flex-direction: column; gap: 10px; justify-content: space-between; text-align: left; }
+.console-box {
+  background: rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.04); border-radius: 8px;
+  padding: 8px 10px; font-family: monospace; font-size: 9px; line-height: 1.4; height: 62px; overflow: hidden;
+}
+.console-log { display: flex; flex-direction: column; gap: 3px; }
+.log-line { color: var(--muted); white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.log-line.text-cyan { color: var(--cyan); }
+.log-line.text-indigo { color: var(--indigo); }
+.log-line.text-green { color: var(--green); }
+
+.voice-equalizer {
+  display: flex; align-items: flex-end; justify-content: center; gap: 3.5px; height: 50px;
+  padding: 0 8px; background: radial-gradient(ellipse at bottom, rgba(124,120,255,.08), transparent 70%);
+  border-radius: 8px; overflow: hidden;
+}
+.eq-bar {
+  width: 2.5px; height: 10%; background: linear-gradient(to top, var(--indigo), var(--violet));
+  border-radius: 99px; animation: eqPulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes eqPulse { 0% { height: 10%; } 100% { height: 85%; } }
+.bar-1 { animation-delay: 0.1s; animation-duration: 0.8s; }
+.bar-2 { animation-delay: 0.3s; animation-duration: 1.1s; }
+.bar-3 { animation-delay: 0.15s; animation-duration: 0.9s; }
+.bar-4 { animation-delay: 0.45s; animation-duration: 1.3s; }
+.bar-5 { animation-delay: 0.2s; animation-duration: 0.75s; }
+.bar-6 { animation-delay: 0.35s; animation-duration: 1.05s; }
+.bar-7 { animation-delay: 0.1s; animation-duration: 0.85s; }
+.bar-8 { animation-delay: 0.5s; animation-duration: 1.2s; }
+.bar-9 { animation-delay: 0.25s; animation-duration: 0.95s; }
+.bar-10 { animation-delay: 0.4s; animation-duration: 1.15s; }
+.bar-11 { animation-delay: 0.18s; animation-duration: 0.8s; }
+.bar-12 { animation-delay: 0.3s; animation-duration: 1.0s; }
+
+.screen-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.metric-card {
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.04); border-radius: 8px;
+  padding: 6px 8px; display: flex; flex-direction: column; gap: 1px;
+}
+.metric-label { font-size: 7.5px; color: var(--soft); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.metric-value { font-size: 10px; color: var(--silver); font-weight: 600; }
+.metric-value.text-green { color: var(--green); }
+
+.stack { display: grid; gap: 16px; }
+.feature-row { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; padding: 20px; border-radius: 18px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); }
+.feature-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(145deg, rgba(110,106,255,.3), rgba(191,90,242,.2)); font-weight: 800; color: #fff; }
+.feature-row h3 { font-size: 18px; margin-bottom: 4px; font-weight: 700; }
+.feature-row p { color: var(--muted); font-size: 15px; }
+
+/* ── Stats ── */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat {
+  padding: 30px; border-radius: 22px; background: var(--panel); border: 1px solid var(--line); min-height: 140px;
+  box-shadow: var(--shadow-md); position: relative; overflow: hidden;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.15s ease-out, border-color .3s, box-shadow .3s;
+}
+.stat::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--indigo), var(--violet)); opacity: 0; transition: opacity .3s;
+}
+.stat:hover { transform: scale(1.025) perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); border-color: var(--line2); box-shadow: var(--shadow-glow); }
+.stat:hover::before { opacity: 1; }
+.stat b { display: block; font-family: var(--font-display); font-size: clamp(32px, 4.5vw, 52px); line-height: 1; color: var(--ink); font-weight: 700; }
+.stat span { display: block; margin-top: 10px; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ── Detailed grid ── */
+.detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.detail-card {
+  border-radius: 24px; padding: 30px; border: 1px solid rgba(255,255,255,.05);
+  background: linear-gradient(160deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.15s ease-out, border-color .35s; position: relative; overflow: hidden;
+}
+.detail-card::before {
+  content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(450px circle at var(--mx,50%) var(--my,50%), rgba(124,120,255,.1), transparent 45%);
+  pointer-events: none;
+}
+.detail-card:hover { transform: scale(1.025) perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); border-color: rgba(124,120,255,.15); box-shadow: var(--shadow-glow); }
+.detail-card:hover::before { opacity: 1; }
+.dc-ico {
+  width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; margin-bottom: 20px;
+  background: rgba(124,120,255,.08); border: 1px solid rgba(124,120,255,.12);
+  transition: all .3s var(--ease-out-expo);
+}
+.detail-card:hover .dc-ico { background: rgba(124,120,255,.14); border-color: rgba(124,120,255,.2); transform: scale(1.05); }
+.detail-card h3 { font-family: var(--font-display); font-size: 20px; margin-bottom: 10px; font-weight: 700; letter-spacing: -.01em; }
+.detail-card > p { color: var(--muted); font-size: 14.5px; margin-bottom: 18px; line-height: 1.6; }
+.dc-list { list-style: none; display: grid; gap: 8px; }
+.dc-list li { color: var(--silver); font-size: 13.5px; padding-left: 20px; position: relative; }
+.dc-list li::before {
+  content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--indigo), var(--violet));
+}
+
+/* ── Technology Stack ── */
+.cards3d { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; perspective: 1200px; }
+.card3d {
+  min-height: 290px; border-radius: 24px; padding: 28px; border: 1px solid var(--line);
+  background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.15s ease-out, border-color .3s;
+}
+.card3d:hover {
+  transform: scale(1.025) perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); border-color: rgba(255,255,255,.2);
+  background: rgba(255,255,255,.06);
+}
+.card3d .chip {
+  display: inline-flex; height: 28px; align-items: center; padding: 0 12px; border-radius: 999px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: var(--muted); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.05em;
+}
+.card3d h3 { font-family: var(--font-display); font-size: 24px; line-height: 1.05; margin-top: 40px; font-weight: 700; }
+.card3d p { margin-top: 12px; color: var(--muted); font-size: 15px; }
+
+/* ── Setup ── */
+.specs { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.spec-table { border: 1px solid var(--line); border-radius: 24px; background: var(--panel); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.spec-row { display: grid; grid-template-columns: 160px 1fr; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--line); }
+.spec-row:last-child { border-bottom: none; }
+.spec-row .k { color: var(--muted); font-weight: 700; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.03em; }
+.spec-row .v { color: var(--ink); font-size: 15px; font-weight: 500; }
+.steps { display: grid; gap: 14px; }
+.step { display: grid; grid-template-columns: 46px 1fr; gap: 16px; align-items: start; padding: 20px; border-radius: 20px; border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+.step .num { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; font-size: 18px; color: #fff; background: linear-gradient(145deg, var(--indigo), var(--violet)); }
+.step h4 { font-family: var(--font-display); font-size: 17px; margin-bottom: 5px; font-weight: 700; }
+.step p { color: var(--muted); font-size: 14px; }
+.step code { background: rgba(255,255,255,.06); border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; font-size: 12.5px; color: var(--cyan); }
+
+/* ── Study Mode Demo ── */
+.flash-demo { display: grid; grid-template-columns: .9fr 1.1fr; gap: 32px; align-items: center; }
+.flip-scene { height: 340px; perspective: 1300px; }
+.flip-card { height: 100%; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.22,1,.36,1); cursor: pointer; position: relative; }
+.flip-card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  border-radius: 28px; border: 1px solid var(--line2); backface-visibility: hidden;
+  background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.045));
+  box-shadow: 0 45px 120px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.2);
+  padding: 34px;
+}
+.face.back { transform: rotateY(180deg); background: linear-gradient(145deg, rgba(10,132,255,.22), rgba(48,209,88,.08)); }
+.face small { position: absolute; top: 20px; left: 22px; color: var(--muted); font-weight: 800; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; }
+.face strong { font-family: var(--font-display); font-size: 38px; line-height: 1.05; font-weight: 700; color: var(--ink); }
+
+
+/* ── Comparison Table ── */
+.compare-card { border: 1px solid var(--line); border-radius: 24px; background: var(--panel); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.compare-table { width: 100%; border-collapse: collapse; text-align: left; }
+.compare-table th, .compare-table td { padding: 18px 24px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.compare-table th { font-family: var(--font-display); font-size: 15px; font-weight: 700; background: rgba(255,255,255,.02); }
+.compare-table td.joya-col { background: rgba(110,106,255,.04); border-left: 1px solid rgba(110,106,255,.15); border-right: 1px solid rgba(110,106,255,.15); font-weight: 700; }
+.compare-table tr:last-child td { border-bottom: none; }
+.check-ok { color: var(--green); font-weight: bold; }
+.check-no { color: var(--soft); }
+
+/* ── Testimonials ── */
+.testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.testimonial-card {
+  padding: 30px; border-radius: 22px; border: 1px solid rgba(255,255,255,.05); background: var(--panel);
+  border-left: 3px solid var(--indigo); box-shadow: var(--shadow-md);
+  transition: all .3s var(--ease-out-expo); position: relative;
+}
+.testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-glow); border-left-color: var(--violet); }
+.stars { color: var(--amber); margin-bottom: 16px; font-size: 14px; letter-spacing: 2px; }
+.test-quote { color: var(--silver); font-size: 14.5px; font-style: italic; line-height: 1.7; margin-bottom: 20px; }
+.test-author { font-size: 13px; font-weight: 700; color: var(--ink); }
+.test-author span { display: block; font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 3px; }
+
+/* ── Founder ── */
+.founder { display: grid; grid-template-columns: 360px 1fr; gap: 54px; align-items: center; }
+.founder-photo {
+  position: relative; aspect-ratio: 3/4; border-radius: 24px; overflow: hidden; border: 1px solid var(--line2);
+  box-shadow: 0 45px 100px rgba(0,0,0,.5); transform-style: preserve-3d; transition: transform 0.3s ease;
+}
+.founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.monogram { position: absolute; inset: 0; display: none; place-items: center; font-size: 80px; font-weight: 900; background: #121319; font-family: var(--font-display); }
+.founder p { color: var(--muted); font-size: 16.5px; margin-top: 16px; line-height: 1.6; }
+.founder b { color: var(--ink); }
+
+/* ── Pricing ── */
+.pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 900px; margin: 0 auto; }
+.plan { padding: 38px 34px; border-radius: 24px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); position: relative; display: flex; flex-direction: column; }
+.plan.pro { border-color: rgba(110,106,255,.4); box-shadow: 0 30px 80px rgba(110,106,255,.14); }
+.plan.pro::after {
+  content: "MOST POPULAR"; position: absolute; top: 22px; right: 24px; font-size: 9px; font-weight: 800; letter-spacing: .08em;
+  color: #fff; background: linear-gradient(135deg, var(--indigo), var(--violet)); padding: 5px 12px; border-radius: 999px;
+}
+.plan h3 { font-family: var(--font-display); font-size: 24px; font-weight: 700; }
+.price { font-family: var(--font-display); font-size: 52px; font-weight: 700; margin: 12px 0; }
+.price small { font-size: 15px; color: var(--muted); font-weight: 500; }
+.plan p { color: var(--muted); margin-bottom: 24px; font-size: 14.5px; }
+.plan ul { list-style: none; display: grid; gap: 11px; margin-bottom: 28px; }
+.plan li { color: var(--silver); padding-left: 22px; position: relative; font-size: 14px; }
+.plan li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.plan .btn { width: 100%; margin-top: auto; }
+
+/* ── Checkout ── */
+.unlock-gate {
+  max-width: 640px; margin: 0 auto; text-align: center; position: relative; overflow: hidden;
+  padding: 48px 36px; border-radius: 28px; border: 1px solid var(--line2);
+  background: linear-gradient(160deg, rgba(110,106,255,.12), rgba(191,90,242,.04));
+  box-shadow: 0 35px 100px rgba(110,106,255,.15);
+}
+.gate-glow { position: absolute; top: -45%; left: 50%; transform: translateX(-50%); width: 120%; height: 120%; background: radial-gradient(circle, rgba(110,106,255,.24), transparent 55%); pointer-events: none; }
+.gate-lock { font-size: 42px; margin-bottom: 8px; }
+.unlock-gate h3 { font-family: var(--font-display); font-size: 28px; font-weight: 700; }
+.unlock-gate p { color: var(--muted); font-size: 15.5px; max-width: 460px; margin: 12px auto 26px; line-height: 1.6; }
+.unlock-gate b { color: var(--ink); }
+.gate-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.gate-trust { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 24px; }
+.gate-trust span { font-size: 11.5px; color: var(--muted); background: rgba(255,255,255,.05); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-weight: 600; }
+
+.buybox.is-locked { display: none; }
+.buybox.reveal-in { animation: gateReveal .55s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes gateReveal { from { opacity: 0; transform: translateY(20px) scale(.98); } to { opacity: 1; transform: none; } }
+
+.buybox { max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.pay-card { border: 1px solid var(--line); border-radius: 24px; background: var(--panel); padding: 32px; display: flex; flex-direction: column; }
+.pay-card.hi { border-color: rgba(110,106,255,.4); background: linear-gradient(160deg, rgba(110,106,255,.1), rgba(191,90,242,.03)); }
+.pay-card h3 { font-family: var(--font-display); font-size: 22px; display: flex; align-items: center; gap: 10px; margin-bottom: 6px; font-weight: 700; }
+.pay-card .lead { color: var(--muted); font-size: 14.5px; margin-bottom: 20px; }
+.qr-holder { width: 210px; height: 210px; margin: 8px auto 18px; border-radius: 16px; background: #fff; padding: 12px; display: grid; place-items: center; }
+.qr-holder canvas, .qr-holder img { width: 100%; height: 100%; }
+.qr-fallback { color: #111; font-size: 12.5px; text-align: center; padding: 12px; font-weight: 600; }
+.pay-note { color: var(--soft); font-size: 12.5px; text-align: center; margin-top: 6px; font-weight: 500; }
+.pay-amt { font-family: var(--font-display); font-size: 34px; font-weight: 700; text-align: center; margin-bottom: 2px; }
+.pay-amt small { font-size: 14px; color: var(--muted); font-weight: 600; }
+.trust { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+.trust span { font-size: 11px; color: var(--muted); background: rgba(255,255,255,.05); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-weight: 600; }
+.mtop { margin-top: auto; }
+
+.confirm-pay { max-width: 940px; margin: 24px auto 0; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.02); padding: 28px 30px; }
+.confirm-pay.is-locked, .pro-banner.is-locked, .pending-banner.is-locked { display: none; }
+.confirm-pay h3 { font-family: var(--font-display); font-size: 19px; margin-bottom: 6px; font-weight: 700; }
+.confirm-pay p { color: var(--muted); font-size: 14.5px; margin-bottom: 18px; }
+.cp-row { display: grid; grid-template-columns: 180px 1fr auto; gap: 12px; }
+.cp-row select, .cp-row input { height: 46px; border-radius: 10px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--ink); padding: 0 14px; font-size: 14px; transition: border-color 0.2s; }
+.cp-row select:focus, .cp-row input:focus { outline: none; border-color: var(--indigo); }
+.cp-msg { min-height: 20px; margin-top: 12px; font-size: 13.5px; font-weight: 600; }
+.cp-msg.err { color: var(--pink); }.cp-msg.ok { color: var(--green); }
+
+.pro-banner, .pending-banner {
+  max-width: 940px; margin: 32px auto 0; display: flex; align-items: center; gap: 28px;
+  border-radius: 28px; padding: 36px 40px; border: 1px solid rgba(255,215,0,0.25);
+  background: radial-gradient(circle at top left, rgba(255,215,0,0.08), rgba(255,255,255,0.01));
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+  backdrop-filter: blur(25px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pro-banner:hover {
+  border-color: rgba(255,215,0,0.45);
+  box-shadow: 0 30px 80px rgba(255,215,0,0.08), 0 24px 60px rgba(0,0,0,0.45);
+}
+.pending-banner {
+  border-color: rgba(255,159,10,0.3);
+  background: radial-gradient(circle at top left, rgba(255,159,10,0.08), rgba(255,255,255,0.01));
+}
+.pro-banner h3, .pending-banner h3 { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+.pro-banner p, .pending-banner p { color: #a1a1a6; font-size: 15px; margin-top: 6px; line-height: 1.6; }
+.pro-banner .btn, .pending-banner .btn { margin-left: auto; }
+.pb-badge { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #000; padding: 6px 14px; border-radius: 8px; background: linear-gradient(135deg, #ffd700, #ff8c00); box-shadow: 0 0 12px rgba(255,215,0,0.35); }
+.pb-badge.pending { color: #fff; background: linear-gradient(135deg, var(--amber), #c77900); }
+
+/* ── FAQ ── */
+.faq { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
+.faq-item { border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.02); overflow: hidden; }
+.faq-q { padding: 20px 24px; cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; gap: 16px; font-size: 16px; }
+.faq-a { max-height: 0; overflow: hidden; color: var(--muted); transition: max-height .35s cubic-bezier(0.16, 1, 0.3, 1), opacity .25s; opacity: 0; }
+.faq-item.anim .faq-a { opacity: 1; }
+.faq-a p { padding: 0 24px 20px; font-size: 14.5px; line-height: 1.6; }
+.faq-item.open .faq-a { max-height: 200px; }
+.faq-q span { transition: transform .3s; font-size: 18px; font-weight: 400; color: var(--soft); }
+.faq-item.open .faq-q span { transform: rotate(45deg); color: var(--ink); }
+
+/* ── Footer ── */
+footer { padding: 80px 0 48px; border-top: none; color: var(--muted); text-align: center; position: relative; }
+footer::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 200px; height: 1px; background: linear-gradient(90deg, transparent, var(--indigo), transparent); }
+.foot-brand-glow { width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle, rgba(110,106,255,.1), transparent 70%); display: grid; place-items: center; margin: 0 auto 6px; }
+.foot-tagline { font-size: 14px; color: var(--soft); font-weight: 500; letter-spacing: .05em; margin-bottom: 22px; }
+.foot-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin: 0 0 22px; font-size: 13.5px; font-weight: 600; }
+.foot-links a { transition: color .25s; }
+.foot-links a:hover { color: var(--indigo); }
+footer p { font-size: 12px; color: var(--soft); font-weight: 500; letter-spacing: .03em; }
+.foot-socials { display: flex; gap: 16px; justify-content: center; margin-bottom: 18px; }
+.foot-socials a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); transition: all .3s; }
+.foot-socials a:hover { border-color: var(--indigo); color: var(--indigo); background: rgba(110,106,255,.08); transform: translateY(-2px); }
+
+/* ── Modal ── */
+.modal { position: fixed; inset: 0; display: none; z-index: 80; place-items: center; background: rgba(0,0,0,.76); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 20px; }
+.modal.open { display: grid; }
+.modal-box { width: min(460px, 100%); border: 1px solid var(--line2); border-radius: 24px; background: #111217; padding: 36px 32px; text-align: center; box-shadow: 0 40px 120px rgba(0,0,0,.7); max-height: 90vh; overflow: auto; }
+.modal-box h3 { font-family: var(--font-display); font-size: 25px; font-weight: 700; }
+.modal-box p { color: var(--muted); margin: 8px 0 22px; font-size: 14.5px; }
+.modal-box .btn { width: 100%; margin-bottom: 10px; }
+.modal-qr { width: 190px; height: 190px; margin: 8px auto 16px; border-radius: 12px; background: #fff; padding: 10px; display: grid; place-items: center; }
+.modal-qr canvas, .modal-qr img { width: 100%; height: 100%; }
+.close { margin-top: 14px; color: var(--muted); cursor: pointer; font-size: 13.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.copybar { display: flex; gap: 8px; align-items: center; justify-content: center; background: rgba(255,255,255,.05); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; margin-bottom: 16px; font-size: 13.5px; }
+.copybar b { color: var(--ink); word-break: break-all; }
+.copybar button { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; border: none; border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 12px; font-weight: 700; }
+
+
+/* ── Profile Section in Modal ── */
+.profile-card { text-align: left; padding: 10px 0; }
+.profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.profile-avatar {
+  width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 24px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--indigo), var(--violet));
+  box-shadow: 0 0 20px rgba(110, 106, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  animation: orbPulse 4s ease-in-out infinite;
+}
+.profile-title h4 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); }
+.profile-title p { color: var(--muted); font-size: 13.5px; margin: 2px 0 0 0; }
+.plan-badge {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800;
+  padding: 4px 10px; border-radius: 999px; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 6px;
+}
+.plan-badge.pro { background: rgba(48,209,88,.14); color:#5be08a; border: 1px solid rgba(48,209,88,.3); box-shadow: 0 0 15px rgba(48,209,88,.15); }
+.plan-badge.free { background: rgba(255,255,255,.05); color:var(--muted); border: 1px solid var(--line); }
+
+.profile-details { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 20px 0; }
+.pd-item { display: flex; flex-direction: column; gap: 4px; }
+.pd-item .lbl { font-size: 11px; font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.04em; }
+.pd-item .val { font-size: 14px; font-weight: 600; color: var(--silver); }
+
+.profile-metrics { background: rgba(255,255,255,.02); border: 1px solid var(--line); border-radius: 16px; padding: 18px; text-align: left; margin-bottom: 8px; }
+.pm-title { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+.pm-bar-bg { height: 6px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
+.pm-bar-fg { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--indigo), var(--cyan)); width: 0; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ── Scroll Reveal ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease-out-expo), transform .8s var(--ease-out-expo); }
+.reveal.in { opacity: 1; transform: none; }
+.reduce-motion * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+:focus-visible { outline: 2px solid rgba(124,120,255,.6); outline-offset: 3px; border-radius: 4px; }
+
+/* ── Responsive adjustments ── */
+@media(max-width:920px) {
+  .hero { min-height: 90svh; }
+  .hero-copy { padding-top: 6vh; }
+  nav .wrap { gap: 12px; }
+  .nav-user { gap: 8px; }
+  .nav-cta, .nav-logout, .user-chip, .nav-admin { min-height: 40px; display: inline-flex; align-items: center; }
+  .showcase, .flash-demo, .founder, .pricing, .specs, .buybox { grid-template-columns: 1fr; }
+  .product-shot { min-height: 420px; }
+  .stats, .cards3d, .detail-grid { grid-template-columns: 1fr 1fr; }
+  .testimonials { grid-template-columns: 1fr; }
+  .founder-photo { max-width: 320px; margin: 0 auto; }
+}
+@media(max-width:560px) {
+  .wrap { width: min(100% - 32px, 1200px); }
+  nav { height: 56px; }
+  nav .wrap { width: min(100% - 20px, 1200px); }
+  .brand { gap: 8px; min-width: 0; }
+  .brand span:last-child { display: none; }
+  .nav-user { gap: 6px; }
+  .nav-cta { min-height: 42px; padding: 0 14px; white-space: nowrap; }
+  .nav-logout, .user-chip, .nav-admin, .pro-badge-header, .standard-badge-header, .free-badge-header { min-height: 42px; padding-left: 12px; padding-right: 12px; }
+  h1 { font-size: clamp(52px, 20vw, 92px); }
+  .hero-sub { font-size: 17.5px; }
+  .hero { min-height: 88svh; padding-bottom: 34px; }
+  section { padding: 72px 0; }
+  .section-head { margin-bottom: 38px; }
+  .section-head p { font-size: 16.5px; line-height: 1.62; }
+  .stats, .cards3d, .detail-grid { grid-template-columns: 1fr; }
+  .cta-row { width: 100%; gap: 10px; margin-top: 30px; }
+  .cta-row .btn, .plan .btn, .gate-actions .btn { width: 100%; min-height: 48px; }
+  .product-shot { min-height: 350px; }
+  .laptop { left: 4%; right: 4%; top: 16%; bottom: 16%; padding: 10px; }
+  .founder-photo { transform: none!important; }
+  .spec-row { grid-template-columns: 120px 1fr; }
+  .cp-row { grid-template-columns: 1fr; }
+  .pro-banner, .pending-banner { flex-direction: column; text-align: center; }
+  .pro-banner .btn { margin-left: 0; }
+}
+
+/* ── Cinematic Loader ── */
+.loader-screen {
+  position: fixed; inset: 0; z-index: 999; background: var(--bg);
+  display: grid; place-items: center; transition: opacity 1s var(--ease-out-expo), visibility 1s;
+}
+.loader-screen.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-inner { text-align: center; }
+.loader-brand {
+  width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center;
+  font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 800; color: #fff;
+  background: linear-gradient(145deg, #eeeef0 0%, var(--indigo) 50%, var(--violet) 100%);
+  margin: 0 auto 20px; animation: loaderPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 40px rgba(124,120,255,.3);
+}
+.loader-bar { width: 200px; height: 2px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; margin: 0 auto; }
+.loader-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--indigo), var(--violet), var(--cyan)); width: 0; animation: loaderFill 1.6s var(--ease-out-expo) forwards; }
+.loader-text { margin-top: 16px; font-size: 10.5px; font-weight: 700; color: var(--soft); letter-spacing: .14em; text-transform: uppercase; }
+@keyframes loaderPulse { 0%,100%{ transform: scale(1); box-shadow: 0 0 40px rgba(124,120,255,.3); } 50%{ transform: scale(1.06); box-shadow: 0 0 60px rgba(124,120,255,.5); } }
+@keyframes loaderFill { 0%{ width: 0; } 40%{ width: 55%; } 100%{ width: 100%; } }
+
+/* ── Cursor Glow ── */
+.cursor-glow {
+  position: fixed; width: 350px; height: 350px; border-radius: 50%; pointer-events: none; z-index: 65;
+  background: radial-gradient(circle, rgba(124,120,255,.06), transparent 60%);
+  transform: translate(-50%, -50%); transition: opacity .4s; opacity: 0;
+}
+body:hover .cursor-glow { opacity: 1; }
+@media(max-width: 768px) { .cursor-glow { display: none; } }
+
+/* ── Animated Gradient Heading ── */
+.gradient-shift {
+  background: linear-gradient(270deg, #eeeef0, #8f8bff, #d8b4fe, #67e8f9, #34d399, #eeeef0);
+  background-size: 600% 600%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: gradShift 10s ease infinite;
+}
+@keyframes gradShift { 0%{ background-position: 0% 50%; } 50%{ background-position: 100% 50%; } 100%{ background-position: 0% 50%; } }
+
+/* ── Section Dividers ── */
+.section-divider {
+  height: 1px; border: none; margin: 0;
+  background: linear-gradient(90deg, transparent, rgba(124,120,255,.2), rgba(192,132,252,.15), transparent);
+}
+
+/* ── Back to Top ── */
+.back-top {
+  position: fixed; bottom: 32px; right: 32px; z-index: 55;
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.08);
+  background: rgba(13,14,20,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  display: grid; place-items: center; cursor: pointer;
+  opacity: 0; transform: translateY(16px); transition: all .35s var(--ease-out-expo); pointer-events: none;
+  box-shadow: var(--shadow-md);
+}
+.back-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.back-top:hover { border-color: rgba(124,120,255,.3); background: rgba(124,120,255,.1); box-shadow: var(--shadow-glow); transform: translateY(-2px); }
+.back-top svg { width: 16px; height: 16px; color: var(--ink); }
+
+/* ── Nav scroll state ── */
+nav.scrolled { border-bottom-color: rgba(124,120,255,.1); box-shadow: 0 4px 24px rgba(0,0,0,.25); background: rgba(6,7,11,.88); }
+
+/* ── Typewriter cursor ── */
+.typewriter-cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--indigo); margin-left: 2px; vertical-align: text-bottom; animation: blink 1.1s step-end infinite; }
+@keyframes blink { 0%,100%{ opacity: 1; } 50%{ opacity: 0; } }
+
+/* ── Parallax subtle ── */
+.parallax-slow { will-change: transform; }
+
+/* ── Tesla Specs Strip Style ── */
+.tesla-specs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin-top: 56px;
+  width: 100%;
+  max-width: 820px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 36px;
+}
+.ts-spec {
+  text-align: center;
+}
+.ts-spec b {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.8vw, 36px);
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  letter-spacing: -0.02em;
+}
+.ts-spec span {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-top: 4px;
+  font-weight: 600;
+}
+@media(max-width: 768px) {
+  .tesla-specs {
+    flex-direction: column;
+    gap: 28px;
+  }
+}
+.clickable-row {
+  transition: all 0.3s var(--ease-out-expo);
+}
+.clickable-row:hover {
+  transform: translateX(6px);
+  border-color: rgba(124,120,255,0.2) !important;
+  background: rgba(124,120,255,0.04) !important;
+}
+.clickable-row:active {
+  transform: translateX(2px) scale(0.98);
+}
+.pro-badge-header {
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #000 !important;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  animation: pulsePro 2s infinite alternate;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+@keyframes pulsePro {
+  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); transform: scale(1); }
+  100% { box-shadow: 0 0 18px rgba(255, 215, 0, 0.7); transform: scale(1.03); }
+}
+.pro-top-bar {
+  background: linear-gradient(90deg, #1d0b3a, #0b1a30);
+  border-bottom: 1px solid rgba(124, 120, 255, 0.25);
+  color: #d1c4e9;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px 16px;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: slideDownBar 0.5s ease-out;
+}
+@keyframes slideDownBar {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.standard-badge-header {
+  background: linear-gradient(135deg, #78909c, #b0bec5);
+  color: #000 !important;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(176, 190, 197, 0.4);
+  animation: pulseStandard 2s infinite alternate;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+@keyframes pulseStandard {
+  0% { box-shadow: 0 0 10px rgba(176, 190, 197, 0.4); transform: scale(1); }
+  100% { box-shadow: 0 0 18px rgba(176, 190, 197, 0.7); transform: scale(1.03); }
+.free-badge-header {
+  background: linear-gradient(135deg, #37474f, #455a64);
+  color: #cfd8dc !important;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.hero-pro-pill {
+  background: linear-gradient(135deg, rgba(48,209,88,.16), rgba(255,215,0,.10));
+  border: 1px solid rgba(48,209,88,.45);
+  color: #5be08a;
+  font-weight: 700;
+  cursor: default;
+  box-shadow: 0 0 24px rgba(48,209,88,.18);
+  animation: pulsePro 2s infinite alternate;
+}
+@keyframes pulseRingOuter {
+  0% { transform: scale(1); opacity: 0.3; }
+  100% { transform: scale(1.15); opacity: 0.9; box-shadow: 0 0 40px rgba(255, 215, 0, 0.2); }
+}
+@keyframes pulseRingInner {
+  0% { transform: scale(0.95); box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  100% { transform: scale(1.05); box-shadow: 0 0 45px rgba(255, 215, 0, 0.6); }
+}
+@keyframes starSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+<!-- Cinematic Loader -->
+<div class="loader-screen" id="loader">
+  <div class="loader-inner">
+    <div class="loader-brand">J</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <div class="loader-text">Initializing JOYA</div>
+  </div>
+</div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div id="progress"></div>
+<div id="proTopBar" class="pro-top-bar" style="display:none;"></div>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-mark">J</span><span>JOYA</span></a>
+    <div class="navlinks">
+      <a href="#experience">Experience</a>
+      <a href="#features">Features</a>
+      <a href="#sandbox">Sandbox</a>
+      <a href="#technology">Technology</a>
+      <a href="#setup">Setup</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#buy">Buy</a>
+    </div>
+    <div class="nav-user">
+      <span id="proBadge" class="pro-badge-header" style="display:none; cursor:pointer;" onclick="openModal('profile')">★ PRO ACTIVE</span>
+      <span class="user-chip" id="userChip" style="display:none; cursor:pointer;" onclick="openModal('profile')"><span class="user-dot"></span><span id="userName">Account</span></span>
+      <a class="nav-cta" href="#download" onclick="openModal('download');return false;">Download JOYA Pro</a>
+      <button class="nav-logout" id="navLogout" onclick="joyaLogout()" style="display:none" title="Log out">Log out</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="stage3d" aria-label="Interactive 3D JOYA core"></canvas>
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow">Mark XXXIX · private local AI</div>
+      <h1>JOYA <span class="gradient-shift">feels alive.</span></h1>
+      <p class="hero-sub" id="heroSub"></p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="openModal('download')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download JOYA Pro (Free)
+        </button>
+      </div>
+      <div class="hero-meta">
+        <span class="pill">100% local</span>
+        <span class="pill">Voice + vision</span>
+        <span class="pill">No monthly subscription</span>
+        <span class="pill">Windows ready</span>
+      </div>
+      <div class="tesla-specs reveal">
+        <div class="ts-spec">
+          <b>0.02ms</b>
+          <span>Response Time</span>
+        </div>
+        <div class="ts-spec">
+          <b>100%</b>
+          <span>Local & Private</span>
+        </div>
+        <div class="ts-spec">
+          <b>Sovereign</b>
+          <span>Cognitive Core</span>
+        </div>
+        <div class="ts-spec">
+          <b>Unlimited</b>
+          <span>Plugins Capacity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll to explore</div>
+</header>
+
+<hr class="section-divider">
+<!-- Marquee scroll band -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>VOICE</span><i>◦</i><span>VISION</span><i>◦</i><span>MEMORY</span><i>◦</i><span>AUTOMATION</span><i>◦</i><span>STUDY</span><i>◦</i><span>ULTRON</span><i>◦</i><span>SYSTEM LAB</span><i>◦</i><span>PRIVACY</span><i>◦</i>
+    <span>VOICE</span><i>◦</i><span>VISION</span><i>◦</i><span>MEMORY</span><i>◦</i><span>AUTOMATION</span><i>◦</i><span>STUDY</span><i>◦</i><span>ULTRON</span><i>◦</i><span>SYSTEM LAB</span><i>◦</i><span>PRIVACY</span><i>◦</i>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Product Experience</div>
+      <h2>Your AI core, built like a device.</h2>
+      <p>JOYA is not just a chat window. It is a local command center for voice, screen understanding, memory, study, and safe automation.</p>
+    </div>
+    <div class="showcase">
+      <div class="product-shot reveal">
+        <div class="laptop">
+          <div class="screen">
+            <div class="screen-top">
+              <div class="sys-title">
+                <span class="status-indicator"></span>
+                <strong>JOYA.OS v39.0</strong>
+              </div>
+              <div class="sys-stats">
+                <span>LATENCY: <strong class="glow-txt-green">12ms</strong></span>
+                <span>| SYNC: <strong class="glow-txt-cyan">LOCAL</strong></span>
+              </div>
+            </div>
+            <div class="screen-workspace">
+              <div class="screen-sidebar">
+                <div class="side-btn active" onclick="simulateTab('core')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+                <div class="side-btn" onclick="simulateTab('cog')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg></div>
+                <div class="side-btn" onclick="simulateTab('auto')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+                <div class="side-btn" onclick="simulateTab('study')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></div>
+                <div class="side-btn" onclick="simulateTab('exam')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg></div>
+              </div>
+              <div class="screen-main">
+                <div class="console-box">
+                  <div class="console-log" id="simulatedLogs">
+                    <div class="log-line text-cyan">> initializing neural layers... [OK]</div>
+                    <div class="log-line text-indigo">> loading local database core... [OK]</div>
+                    <div class="log-line">> perception engine ready. listening.</div>
+                  </div>
+                </div>
+                <div class="voice-equalizer">
+                  <span class="eq-bar bar-1"></span>
+                  <span class="eq-bar bar-2"></span>
+                  <span class="eq-bar bar-3"></span>
+                  <span class="eq-bar bar-4"></span>
+                  <span class="eq-bar bar-5"></span>
+                  <span class="eq-bar bar-6"></span>
+                  <span class="eq-bar bar-7"></span>
+                  <span class="eq-bar bar-8"></span>
+                  <span class="eq-bar bar-9"></span>
+                  <span class="eq-bar bar-10"></span>
+                  <span class="eq-bar bar-11"></span>
+                  <span class="eq-bar bar-12"></span>
+                </div>
+                <div class="screen-metrics">
+                  <div class="metric-card">
+                    <span class="metric-label">COGNITIVE ENGINE</span>
+                    <span class="metric-value" id="simMetric1">Active</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">SECURE ENCRYPTION</span>
+                    <span class="metric-value text-green" id="simMetric2">AES-256</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="feature-row reveal"><div class="feature-icon">01</div><div><h3>Human response layer</h3><p>Emotion-aware replies, warmer continuity, and voice pacing that changes with your mood.</p></div></div>
+        <div class="feature-row reveal"><div class="feature-icon">02</div><div><h3>Screen + camera intelligence</h3><p>Analyze what is visible, explain it, and run safe next actions with confirmation.</p></div></div>
+        <div class="feature-row reveal"><div class="feature-icon">03</div><div><h3>Private memory</h3><p>Local identity, people, study progress, habits, and reminders stay on your own machine.</p></div></div>
+        <div class="feature-row reveal"><div class="feature-icon">04</div><div><h3>System Lab & Ultron</h3><p>30+ built-in tools: monitors, focus timer, translator, encryptor, benchmark, and more.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><b data-count="7">0</b><span>cognition layers</span></div>
+      <div class="stat"><b data-count="350">0</b><span>local skills</span></div>
+      <div class="stat"><b data-count="100">0</b><span>privacy-first design</span></div>
+      <div class="stat"><b data-count="0">0</b><span>monthly fee</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">Everything Built In</div>
+      <h2>One system. Infinite capability.</h2>
+      <p>Voice, vision, study, automation, memory, and safety — engineered together into a single polished companion. Explore every layer in detail.</p>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card reveal">
+        <div class="dc-ico">🎙️</div>
+        <h3>Natural Voice</h3>
+        <p>Real conversation, not commands.</p>
+        <ul class="dc-list">
+          <li>Hinglish + English fluency</li>
+          <li>Emotional voice pacing & tone</li>
+          <li>Hands-free wake word flow</li>
+          <li>Interrupt & continue mid-talk</li>
+          <li>Multiple voice personalities</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">👁️</div>
+        <h3>Screen & Camera Vision</h3>
+        <p>JOYA sees what you see.</p>
+        <ul class="dc-list">
+          <li>Live screen understanding</li>
+          <li>Camera object & text reading</li>
+          <li>Explain, summarize, guide</li>
+          <li>Sensitive-detail scanning</li>
+          <li>Live camera send & analysis</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">🖥️</div>
+        <h3>PC Automation</h3>
+        <p>Control your computer safely.</p>
+        <ul class="dc-list">
+          <li>Open apps & organize files</li>
+          <li>Run commands with confirmation</li>
+          <li>Computer Autopilot checks</li>
+          <li>Workflow automation builders</li>
+          <li>Danger-action safety guards</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">🧠</div>
+        <h3>Living Memory</h3>
+        <p>Context that never resets.</p>
+        <ul class="dc-list">
+          <li>People, preferences & goals</li>
+          <li>Study weaknesses tracked</li>
+          <li>Habits & recent life events</li>
+          <li>Human identity memory</li>
+          <li>100% local storage</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">📚</div>
+        <h3>Study Superpowers</h3>
+        <p>Revise smarter, remember longer.</p>
+        <ul class="dc-list">
+          <li>Premium flashcards (Q&A reveal)</li>
+          <li>Spaced repetition engine</li>
+          <li>Feynman recall & mind games</li>
+          <li>Weak-topic resurfacing</li>
+          <li>Exam readiness tracking</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">🧪</div>
+        <h3>System Lab</h3>
+        <p>30+ premium mini-tools.</p>
+        <ul class="dc-list">
+          <li>CPU / GPU / RAM live monitors</li>
+          <li>Focus timer, notes, clipboard</li>
+          <li>Translator, QR, encryptor</li>
+          <li>Benchmark, battery, crypto</li>
+          <li>Theme customizer & more</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">🤖</div>
+        <h3>Ultron Intelligence</h3>
+        <p>A self-learning engine inside.</p>
+        <ul class="dc-list">
+          <li>Multi-engine web search</li>
+          <li>Knowledge base & live news</li>
+          <li>Built-in code runner</li>
+          <li>Auto-learn from usage</li>
+          <li>Integrated web browser</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">💬</div>
+        <h3>Companion Layer</h3>
+        <p>It feels genuinely present.</p>
+        <ul class="dc-list">
+          <li>Mood-aware continuity</li>
+          <li>Morning brief & alerts</li>
+          <li>Proactive helpful nudges</li>
+          <li>Micro human behaviors</li>
+          <li>Floating desktop assistant</li>
+        </ul>
+      </div>
+      <div class="detail-card reveal">
+        <div class="dc-ico">🔒</div>
+        <h3>Privacy & Safety</h3>
+        <p>Yours, and only yours.</p>
+        <ul class="dc-list">
+          <li>Local-first architecture</li>
+          <li>Permission-based automation</li>
+          <li>No forced cloud accounts</li>
+          <li>Confirm before risky actions</li>
+          <li>You own your data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+<section id="sandbox">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">Live Interactive Sandbox</div>
+      <h2>Test JOYA's brain here.</h2>
+      <p>Simulate local actions, screen perception, and voice intelligence directly in your browser.</p>
+    </div>
+    
+    <div class="showcase">
+      <div class="stack">
+        <!-- Mode controls -->
+        <div class="feature-row clickable-row reveal" onclick="runSandbox('voice')" id="sandboxVoiceBtn" style="cursor: pointer;">
+          <div class="feature-icon">🎙️</div>
+          <div>
+            <h3>🎙️ Trigger Voice Response</h3>
+            <p>JOYA will analyze current page state and talk back using browser-local synthesiser.</p>
+          </div>
+        </div>
+        
+        <div class="feature-row clickable-row reveal" onclick="runSandbox('vision')" id="sandboxVisionBtn" style="cursor: pointer;">
+          <div class="feature-icon">👁️</div>
+          <div>
+            <h3>👁️ Trigger Screen Scanner</h3>
+            <p>Perform a grid scan on this browser page, parsing content and listing elements.</p>
+          </div>
+        </div>
+        
+        <div class="feature-row clickable-row reveal" onclick="runSandbox('automation')" id="sandboxAutoBtn" style="cursor: pointer;">
+          <div class="feature-icon">⚡</div>
+          <div>
+            <h3>⚡ Try Safe Automation</h3>
+            <p>Watch a simulated keystroke automation sequence run in a local shell console.</p>
+          </div>
+        </div>
+
+        <div class="feature-row clickable-row reveal" onclick="runSandbox('cognition')" id="sandboxCognitionBtn" style="cursor: pointer; margin-top: 12px;">
+          <div class="feature-icon">🧠</div>
+          <div>
+            <h3>🧠 Scan Cognitive Memory</h3>
+            <p>Access memory synapses, check relationship weight indexes, and load active profiles.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Diagnostic Monitor -->
+      <div class="product-shot reveal" style="padding: 24px; min-height: 400px; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+        <div class="screen" style="flex: 1; min-height: 320px; background: #08090d;">
+          <!-- Top bar -->
+          <div class="screen-top">
+            <div class="sys-title">
+              <span class="status-indicator" id="sandboxIndicator"></span>
+              <strong id="sandboxStatus">SYSTEM LAB SANDBOX : ACTIVE</strong>
+            </div>
+            <div class="sys-stats">
+              <span>WIDGET: <strong class="glow-txt-cyan">LIVE_TEST</strong></span>
+            </div>
+          </div>
+          
+          <!-- Workspace: terminal output & live visualizer -->
+          <div class="screen-main">
+            <!-- Terminal Output -->
+            <div class="console-box" style="height: 140px; background: rgba(0,0,0,0.6);">
+              <div class="console-log" id="sandboxLogs">
+                <div class="log-line text-cyan">>>> Welcome to the JOYA live sandbox terminal.</div>
+                <div class="log-line">>>> Click on any control module on the left to begin...</div>
+              </div>
+            </div>
+            
+            <!-- Voice wave visualizer (visible during talking/listening) -->
+            <div class="voice-equalizer" id="sandboxEqualizer" style="height: 60px; display: flex; opacity: 0.3; transition: opacity 0.4s;">
+              <span class="eq-bar bar-1"></span>
+              <span class="eq-bar bar-2"></span>
+              <span class="eq-bar bar-3"></span>
+              <span class="eq-bar bar-4"></span>
+              <span class="eq-bar bar-5"></span>
+              <span class="eq-bar bar-6"></span>
+              <span class="eq-bar bar-7"></span>
+              <span class="eq-bar bar-8"></span>
+              <span class="eq-bar bar-9"></span>
+              <span class="eq-bar bar-10"></span>
+              <span class="eq-bar bar-11"></span>
+              <span class="eq-bar bar-12"></span>
+            </div>
+            
+            <!-- Laser Scanner (Visible during scanning) -->
+            <div id="sandboxScanner" style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--green), transparent); opacity: 0; pointer-events: none; z-index: 50; transition: opacity 0.3s;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+<section id="technology">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">Under the Hood</div>
+      <h2>Engineered for intelligence.</h2>
+      <p>Built on battle-tested foundations with 365+ action modules, multi-model AI brain, and Omega X AGI architecture.</p>
+    </div>
+    <div class="cards3d">
+      <div class="card3d reveal">
+        <div class="chip">CORE</div>
+        <h3>Python + Gemini</h3>
+        <p>Powered by Google Gemini with local Python runtime. Every operation runs safely and securely on your own machine.</p>
+      </div>
+      <div class="card3d reveal">
+        <div class="chip">MODULES</div>
+        <h3>365+ Actions</h3>
+        <p>Voice, vision, study, finance, health, security, WhatsApp, travel, gaming — all built-in modules working in harmony.</p>
+      </div>
+      <div class="card3d reveal">
+        <div class="chip">AGI</div>
+        <h3>Omega X Architecture</h3>
+        <p>A structured 24-module AGI system containing Brain, Reasoning, Memory, Prediction, Self-Evolution, World Model, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+<section id="setup">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">Setup in Minutes</div>
+      <h2>Download. Run. Talk.</h2>
+      <p>No complex config. Grab the installer, run one file, and JOYA boots into her live core.</p>
+    </div>
+    <div class="specs">
+      <div class="reveal">
+        <div class="spec-table">
+          <div class="spec-row"><div class="k">OS</div><div class="v">Windows 10 / 11 (64-bit)</div></div>
+          <div class="spec-row"><div class="k">Python</div><div class="v">3.11+ (auto-checked on launch)</div></div>
+          <div class="spec-row"><div class="k">RAM</div><div class="v">8 GB minimum · 16 GB recommended</div></div>
+          <div class="spec-row"><div class="k">Disk</div><div class="v">~2 GB free space</div></div>
+          <div class="spec-row"><div class="k">Mic / Camera</div><div class="v">Optional — for voice & vision</div></div>
+          <div class="spec-row"><div class="k">Internet</div><div class="v">Optional — core runs local</div></div>
+        </div>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><div class="num">1</div><div><h4>Download JOYA</h4><p>Hit <b>Download Free</b> to download and run the native desktop installer.</p></div></div>
+        <div class="step"><div class="num">2</div><div><h4>Run the launcher</h4><p>Double-click <code>install_and_launch.bat</code>. It installs dependencies automatically.</p></div></div>
+        <div class="step"><div class="num">3</div><div><h4>Say hello</h4><p>JOYA boots into her live core. Use your wake word or just start talking.</p></div></div>
+        <div class="step"><div class="num">4</div><div><h4>Unlock Pro (optional)</h4><p>Pay once via <b>UPI or Razorpay</b> to unlock every cognition layer forever.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="study">
+  <div class="wrap">
+    <div class="flash-demo">
+      <div class="flip-scene reveal">
+        <div class="flip-card" id="flipCard" onclick="this.classList.toggle('flipped')">
+          <div class="face"><small>Physics · 78%</small><strong>Newton's second law?</strong></div>
+          <div class="face back"><small>Answer</small><strong>F = m × a</strong></div>
+        </div>
+      </div>
+      <div class="section-head reveal">
+        <div class="kicker">Study Mode</div>
+        <h2>Premium flashcards with a brain.</h2>
+        <p>JOYA adapts to mistakes, saves weak topics, and brings them back when you need them most. Tap the card to flip.</p>
+        <div class="cta-row"><button class="btn btn-secondary" onclick="document.getElementById('flipCard').classList.toggle('flipped')">Flip card</button></div>
+      </div>
+    </div>
+    
+    <div class="flash-demo" style="margin-top: 80px; border-top: 1px solid var(--line); padding-top: 80px;">
+      <div class="section-head reveal">
+        <div class="kicker">Exam Autopilot</div>
+        <h2>Predict readiness, ace the target.</h2>
+        <p>JOYA parses your chapters progress, tracks logged study hours, integrates mock results, and estimates your exact Exam Readiness % with custom AI tips.</p>
+        <div class="cta-row"><button class="btn btn-secondary" onclick="simulateReadinessCheck()">Estimate Readiness</button></div>
+      </div>
+      <div class="readiness-gauge reveal" style="position: relative; display: flex; justify-content: center; align-items: center;">
+        <div style="width: 320px; height: 320px; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); border: 1px solid var(--line2); box-shadow: 0 40px 100px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <small style="color: var(--cyan); text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 8px;">CHEMISTRY EXAM</small>
+          <strong id="readinessPercent" style="font-family: var(--font-display); font-size: 72px; color: var(--ink); text-shadow: 0 0 30px var(--cyan); transition: text-shadow 0.5s ease;">87.2%</strong>
+          <span style="font-size: 13px; color: var(--muted); margin-top: 12px;">AI Estimate: <b style="color: var(--green);" id="readinessVerdict">READY</b></span>
+          <div style="width: 80%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 20px; overflow: hidden;">
+            <div id="readinessBar" style="width: 87.2%; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--green)); transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">Why JOYA</div>
+      <h2>Not another chatbot.</h2>
+      <p>See how JOYA stacks up against the alternatives.</p>
+    </div>
+    <div class="compare-card reveal">
+      <div class="tscroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="joya-col">JOYA Pro</th>
+              <th>ChatGPT</th>
+              <th>Siri</th>
+              <th>Alexa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Runs 100% locally</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+            <tr>
+              <td>Voice + Screen vision</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">Limited</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+            <tr>
+              <td>PC automation & control</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+            <tr>
+              <td>Adaptive study system</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+            <tr>
+              <td>Persistent memory</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">Limited</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+            <tr>
+              <td>No monthly fee</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-ok">✅ Yes</span></td>
+            </tr>
+            <tr>
+              <td>365+ built-in skills</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+            <tr>
+              <td>Self-learning engine</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+            <tr>
+              <td>Open & extensible</td>
+              <td class="joya-col"><span class="check-ok">✅ Yes</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+              <td><span class="check-no">❌ No</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">What Users Say</div>
+      <h2>Loved by early adopters.</h2>
+      <p>Real feedback from users running JOYA live on their PCs.</p>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="test-quote">"JOYA is not just an AI — it feels like having a genius friend who actually knows my life. The study mode alone saved my semester."</p>
+        <div class="test-author">Arjun<span>Engineering Student</span></div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="test-quote">"I was skeptical about a local AI, but the voice quality and PC control are mind-blowing. No cloud dependency means real privacy."</p>
+        <div class="test-author">Priya<span>Developer</span></div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="test-quote">"The fact that it remembers our conversations and adapts to my schedule is something no other assistant does. Worth every rupee."</p>
+        <div class="test-author">Rahul<span>Content Creator</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="founder">
+  <div class="wrap">
+    <div class="founder reveal">
+      <div class="founder-photo" id="founderCard">
+        <img src="assets/founder.jpg" alt="Santosh Kumar, founder of JOYA" onerror="this.style.display='none';this.parentElement.querySelector('.monogram').style.display='grid';">
+        <div class="monogram">SK</div>
+      </div>
+      <div>
+        <div class="kicker">Founder</div>
+        <h2>Built by Santosh Kumar.</h2>
+        <p>Most people build apps. <b>He set out to build a companion.</b> JOYA brings together hundreds of local tools, human-like cognition, voice emotion, study science, and desktop automation.</p>
+        <p>The goal is simple: an AI that feels private, powerful, and genuinely present on your own PC.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">Pricing</div>
+      <h2>Start free. Upgrade once.</h2>
+      <p>No subscriptions. Free forever, or Pro lifetime for everything.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan reveal">
+        <h3>7-Day Trial</h3>
+        <div class="price">₹0</div>
+        <p>Pehle 7 din trial me use karein. Uske baad automatic close ho jayega jab tak payment na ho.</p>
+        <ul><li>Voice companion chat</li><li>Screen & vision tools</li><li>Trial duration: 7 Days</li><li>Auto-lock after 7 days</li></ul>
+        <button class="btn btn-secondary" onclick="openModal('download')">Download Trial</button>
+      </div>
+      <div class="plan reveal">
+        <h3>Standard</h3>
+        <div class="price">₹99 <small>one-time</small></div>
+        <p>Core companion layers to keep the AI active on your PC.</p>
+        <ul><li>Unlimited trial extension</li><li>Voice companion chat</li><li>Screen & vision tools</li><li>Basic memory core</li></ul>
+        <button class="btn btn-secondary" onclick="openModal('buy_standard')">Buy Standard</button>
+      </div>
+      <div class="plan pro reveal">
+        <h3>Pro</h3>
+        <div class="price"><span id="proPrice">₹299</span> <small>one-time</small></div>
+        <p>Unlock the complete JOYA Mark XXXIX experience.</p>
+        <ul><li>All 7 cognition layers</li><li>Premium adaptive flashcards</li><li>Autonomous agency & autopilot</li><li>Ultron self-learning engine</li><li>Lifetime priority updates</li></ul>
+        <button class="btn btn-primary" onclick="openModal('buy')">Buy Pro — Pay Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="buy">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="kicker">Checkout</div>
+      <h2>Get JOYA Pro today.</h2>
+      <p>Lifetime access — no renewals, ever. Unlock to reveal your payment options.</p>
+    </div>
+
+    <!-- GATE: payment stays hidden until user chooses to unlock -->
+    <div class="unlock-gate reveal" id="unlockGate">
+      <div class="gate-glow"></div>
+      <div class="gate-lock">🔒</div>
+      <h3>Unlock JOYA Pro</h3>
+      <p>One-time payment of <b><span id="gatePrice">₹299</span></b> — lifetime, no subscription. Click below to reveal secure UPI &amp; card payment.</p>
+      <div class="gate-actions">
+        <button class="btn btn-primary" onclick="unlockPayment()">🔓 Unlock Pro — Reveal Payment</button>
+        <button class="btn btn-secondary" onclick="openModal('download')">Try Free First</button>
+      </div>
+      <div class="gate-trust"><span>🔒 Secure</span><span>♾️ Lifetime</span><span>🚫 No renewals</span><span>🇮🇳 UPI + Cards</span></div>
+    </div>
+
+    <!-- Payment options (revealed after unlock) -->
+    <div class="buybox is-locked" id="payBox">
+      <!-- UPI -->
+      <div class="pay-card hi">
+        <h3>⚡ Pay with UPI</h3>
+        <div class="lead">Scan the QR with any UPI app — GPay, PhonePe, Paytm, BHIM.</div>
+        <div class="pay-amt"><span id="upiAmt">₹299</span> <small>lifetime</small></div>
+        <div class="qr-holder" id="upiQr"><div class="qr-fallback">Add your UPI ID in the config to show the QR code.</div></div>
+        <div class="pay-note" id="upiIdNote" style="display: none;">UPI ID: not configured yet</div>
+        <div class="mtop">
+          <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="payUpi()">Open Default UPI App</button>
+          
+          <div style="margin-top: 16px; text-align: center;">
+            <div style="font-size: 11px; color: var(--soft); margin-bottom: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Or Pay via Mobile App</div>
+            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+              <button class="btn btn-secondary" onclick="payUpiSpecific('gpay')" style="padding: 6px 12px; font-size: 12px; height: 32px; display: flex; align-items: center; gap: 4px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); cursor: pointer; color: #ffffff;">
+                <span style="font-size: 14px;">🤖</span> GPay
+              </button>
+              <button class="btn btn-secondary" onclick="payUpiSpecific('phonepe')" style="padding: 6px 12px; font-size: 12px; height: 32px; display: flex; align-items: center; gap: 4px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); cursor: pointer; color: #ffffff;">
+                <span style="font-size: 14px;">💜</span> PhonePe
+              </button>
+              <button class="btn btn-secondary" onclick="payUpiSpecific('paytm')" style="padding: 6px 12px; font-size: 12px; height: 32px; display: flex; align-items: center; gap: 4px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); cursor: pointer; color: #ffffff;">
+                <span style="font-size: 14px;">💙</span> Paytm
+              </button>
+              <button class="btn btn-secondary" onclick="payUpiSpecific('bhim')" style="padding: 6px 12px; font-size: 12px; height: 32px; display: flex; align-items: center; gap: 4px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); cursor: pointer; color: #ffffff;">
+                <span style="font-size: 14px;">🌟</span> BHIM
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="trust"><span>🔒 Direct to founder</span><span>✅ Instant</span><span>🇮🇳 UPI</span></div>
+      </div>
+      <!-- Razorpay / Card -->
+      <div class="pay-card">
+        <h3>💳 Card / Netbanking</h3>
+        <div class="lead">Secure hosted checkout via Razorpay — cards, UPI, netbanking &amp; wallets.</div>
+        <div class="pay-amt"><span id="rzpAmt">₹299</span> <small>lifetime</small></div>
+        <div style="flex:1;display:grid;place-items:center;min-height:150px;color:var(--muted);text-align:center;font-size:14px;padding:14px">
+          Razorpay gives you a professional, secure gateway with automatic receipts and refunds handling.
+        </div>
+        <div class="mtop">
+          <button class="btn btn-secondary" style="width:100%" onclick="payRazorpay()">Pay with Razorpay</button>
+          <div class="pay-note" style="margin-top:10px">After payment, share your receipt to receive the Pro unlock.</div>
+        </div>
+        <div class="trust"><span>🔒 PCI-secure</span><span>💳 All cards</span><span>🧾 Auto receipt</span></div>
+      </div>
+    </div>
+
+    <!-- Confirm-payment -->
+    <div class="confirm-pay is-locked" id="confirmPay">
+      <h3>✅ Paid already? Confirm your payment</h3>
+      <p>Enter your UPI/transaction reference so we can verify and unlock <b>JOYA Pro</b> on your account.</p>
+      <div class="cp-row">
+        <select id="cpMethod">
+          <option value="UPI">Paid via UPI</option>
+          <option value="Razorpay">Paid via Razorpay / Card</option>
+          <option value="Other">Other</option>
+        </select>
+        <input id="cpRef" type="text" placeholder="Transaction / UPI reference number">
+        <button class="btn btn-primary" onclick="submitOrder()">Submit for verification</button>
+      </div>
+      <div class="cp-msg" id="cpMsg"></div>
+    </div>
+
+    <!-- Pro Banner -->
+    <div class="pro-banner is-locked" id="proBanner">
+      <div class="pb-badge">★ PRO</div>
+      <div>
+        <h3>You're a JOYA Pro member 🎉</h3>
+        <p>Every cognition layer, Ultron, autonomous agency & premium flashcards are unlocked. Thank you!</p>
+      </div>
+      <a class="btn btn-primary" href="/download" download>⬇ Download JOYA</a>
+    </div>
+
+    <!-- Pending Banner -->
+    <div class="pending-banner is-locked" id="pendingBanner">
+      <div class="pb-badge pending">⏳ PENDING</div>
+      <div>
+        <h3>Payment received — verification in progress</h3>
+        <p>Your payment is being verified. Pro will unlock on your account shortly. You can refresh this page to check.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head center reveal"><div class="kicker">FAQ</div><h2>Questions</h2></div>
+    <div class="faq">
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is JOYA private?<span>+</span></div><div class="faq-a"><p>JOYA is designed around local storage and local workflows. External AI providers are only used where you configure them.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Does Pro have monthly fees?<span>+</span></div><div class="faq-a"><p>No. Pro is a one-time lifetime purchase. Pay once, keep it forever.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">How do I pay?<span>+</span></div><div class="faq-a"><p>Scan the UPI QR with any UPI app, or use the secure Razorpay checkout for cards and netbanking. Both are on the Buy section.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What do I get after paying?<span>+</span></div><div class="faq-a"><p>You unlock all cognition layers, autonomous agency, Ultron, and premium adaptive flashcards, plus lifetime priority updates.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can it control my computer?<span>+</span></div><div class="faq-a"><p>Yes — with permission and safe confirmation for any risky action.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What are the system requirements?<span>+</span></div><div class="faq-a"><p>Windows 10/11 (64-bit), Python 3.11+, 8 GB RAM (16 GB recommended), ~2 GB free disk. See the Setup section.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" aria-label="Back to top" onclick="scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand-glow">
+      <div class="brand" style="justify-content:center"><span class="brand-mark">J</span><span>JOYA</span></div>
+    </div>
+    <div class="foot-tagline">Designed to feel human. Built to be extraordinary.</div>
+    <div class="foot-links">
+      <a href="#experience">Experience</a>
+      <a href="#features">Features</a>
+      <a href="#sandbox">Sandbox</a>
+      <a href="#technology">Technology</a>
+      <a href="#setup">Setup</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" onclick="openModal('download');return false;">Download</a>
+    </div>
+    <div class="foot-socials">
+      <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+    </div>
+    <p>Mark XXXIX · © <span id="yr">2026</span> Santosh Kumar. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h3 id="modalTitle">Download JOYA</h3>
+    <p id="modalDesc">Full local installer and setup guide.</p>
+    <div id="modalBody"></div>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script defer src="/js/qrcode.min.js"></script>
+<script defer>
+/* ── Auth guard ── */
+let JOYA_ME = null;
+(function joyaAuthGuard(){
+  fetch("/api/me",{cache:"no-store"}).then(r=>r.json()).then(d=>{
+    if(!d || !d.authed){
+      if(d && d.unverified) {
+        location.replace("/verify.html?email=" + encodeURIComponent(d.email));
+      } else {
+        location.replace("/login.html");
+      }
+      return;
+    }
+    JOYA_ME = d;
+    const chip=document.getElementById("userChip"),nm=document.getElementById("userName"),
+          lo=document.getElementById("navLogout");
+    if(chip){
+      chip.style.display="inline-flex";
+      if(d.profile_pic) {
+        const dot = chip.querySelector(".user-dot");
+        if(dot) {
+          const img = document.createElement("img");
+          img.src = d.profile_pic;
+          img.style.cssText = "width:18px; height:18px; border-radius:50%; object-fit:cover; margin-right:4px; border:1px solid rgba(255,255,255,0.2);";
+          dot.replaceWith(img);
+        }
+      }
+    }
+    if(nm){nm.textContent=(d.is_pro?"★ ":"")+(d.name||"Account");}
+    if(lo){lo.style.display="inline-flex";}
+    applyProState(d);
+    // Play congratulations celebration modal every time a Pro user logs in
+    try{
+      const isCreatorAdmin = d.is_admin || (d.email && ["santosh@joya.com", "yadavkumar5354@gmail.com"].includes(d.email.toLowerCase()));
+      // Separate check for admin/creator, others remain restricted to is_pro only
+      if (d.is_pro || isCreatorAdmin) {
+        setTimeout(()=>{ if(window.showCongratsCelebration) showCongratsCelebration(); }, 900);
+      }
+    }catch(_){}
+  }).catch(()=>{});
+})();
+
+function applyProState(d){
+  const gate=document.getElementById("unlockGate"),
+        box=document.getElementById("payBox"),
+        confirm=document.getElementById("confirmPay"),
+        pro=document.getElementById("proBanner"),
+        pending=document.getElementById("pendingBanner"),
+        proBadge=document.getElementById("proBadge"),
+        proTopBar=document.getElementById("proTopBar"),
+        navCta=document.querySelector(".nav-cta"),
+        pricingSection=document.getElementById("pricing"),
+        buySection=document.getElementById("buy"),
+        heroBuyBtn=document.getElementById("heroBuyBtn"),
+        heroProPill=document.getElementById("heroProPill");
+  const show=(el,on)=>{ if(el) el.classList.toggle("is-locked", !on); };
+
+  // Hide nav links for pricing/buy for Pro users
+  function hideProNavLinks(hide) {
+    document.querySelectorAll('.navlinks a, .foot-links a').forEach(a => {
+      const href = (a.getAttribute('href') || '').toLowerCase();
+      if(href === '#pricing' || href === '#buy') {
+        a.style.display = hide ? 'none' : '';
+      }
+    });
+  }
+
+  // Define dynamic scroll helper
+  window.scrollToBuyUpgrade = function() {
+    const buyBox = document.getElementById("payBox");
+    if(buyBox) {
+      buyBox.classList.remove("is-locked");
+      buyBox.scrollIntoView({behavior:"smooth",block:"center"});
+      initUpiCard();
+    }
+  };
+
+  if(d.is_pro && d.plan_type === 'standard'){
+    // Standard plan user: can upgrade to Pro for 200
+    if(heroBuyBtn){ heroBuyBtn.style.display="inline-flex"; heroBuyBtn.innerHTML='⬆ Upgrade to Pro — ₹200'; }
+    if(heroProPill){ heroProPill.style.display="inline-flex"; heroProPill.textContent="★ You are a Standard user — lifetime active"; }
+    if(gate) gate.style.display="none";
+    show(box,true); show(confirm,true); show(pending, (d.order_status === "pending")); show(pro,false);
+
+    // Show only the Pro plan option in pricing, customized for upgrade
+    if(pricingSection) {
+      pricingSection.style.display="";
+      const plans = pricingSection.querySelectorAll('.plan');
+      if (plans.length >= 3) {
+        plans[0].style.display = 'none'; // hide trial
+        plans[1].style.display = 'none'; // hide standard
+        plans[2].style.display = 'block'; // show pro
+        plans[2].querySelector('h3').textContent = 'Pro Upgrade';
+        plans[2].querySelector('#proPrice').textContent = '₹200';
+        plans[2].querySelector('p').textContent = 'Upgrade your standard plan to complete JOYA Pro lifetime features.';
+        const btn = plans[2].querySelector('.btn');
+        btn.textContent = 'Upgrade to Pro — ₹200';
+        btn.setAttribute('onclick', "openModal('buy_upgrade')");
+      }
+    }
+    
+    // Configure buybox for upgrade checkout
+    const gP = document.getElementById("gatePrice"); if(gP) gP.textContent = "₹200";
+    const uA = document.getElementById("upiAmt"); if(uA) uA.textContent = "₹200";
+    const rA = document.getElementById("rzpAmt"); if(rA) rA.textContent = "₹200";
+
+    // Show nav links and adjust button
+    hideProNavLinks(false);
+    if(navCta) {
+      navCta.style.display="inline-flex";
+      navCta.textContent = "Upgrade to Pro";
+      navCta.setAttribute('href', '#pricing');
+    }
+
+    // Show standard badge and top bar with upgrade option
+    if(proBadge) {
+      proBadge.style.display="inline-flex";
+      proBadge.className = "standard-badge-header";
+      proBadge.textContent = "★ STANDARD ACTIVE";
+    }
+    if(proTopBar) {
+      proTopBar.style.display="block";
+      proTopBar.innerHTML=`<span>✨ Welcome, <strong>${d.name || "Operator"}</strong>! <strong>★ JOYA Standard Lifetime Active</strong>. <a href="#pricing" style="color: #ffd700; text-decoration: underline; margin-left: 6px; font-weight: 700;">Upgrade to Pro for ₹200</a> to unlock all AGI features! 🚀</span>`;
+    }
+  } else if(d.is_pro && d.plan_type !== 'standard'){
+    // Premium plan user: hide everything completely
+    if(heroBuyBtn) heroBuyBtn.style.display="none";
+    if(heroProPill){ heroProPill.style.display="inline-flex"; heroProPill.textContent="★ You are a Pro user — everything unlocked"; }
+    if(gate) gate.style.display="none";
+    show(box,false); show(confirm,false); show(pending,false); show(pro,true);
+
+    // Completely hide pricing and buy sections — already purchased
+    if(pricingSection) pricingSection.style.display="none";
+    if(buySection) {
+      // Keep buy section visible but only show the Pro banner
+      const buyChildren = buySection.querySelectorAll('.section-head, .unlock-gate, .buybox, .confirm-pay, .pending-banner');
+      buyChildren.forEach(el => el.style.display = 'none');
+    }
+
+    // Hide pricing/buy nav links & CTA button
+    hideProNavLinks(true);
+    if(navCta) navCta.style.display="none";
+
+    // Also hide the section-divider just before pricing
+    if(pricingSection && pricingSection.previousElementSibling && pricingSection.previousElementSibling.classList.contains('section-divider')) {
+      pricingSection.previousElementSibling.style.display = 'none';
+    }
+
+    // Show Pro badge and top bar
+    if(proBadge) {
+      proBadge.style.display="inline-flex";
+      proBadge.className = "pro-badge-header";
+      proBadge.textContent = "★ PRO ACTIVE";
+    }
+    if(proTopBar) {
+      proTopBar.style.display="block";
+      proTopBar.innerHTML=`<span>✨ Welcome, <strong>${d.name || "Operator"}</strong>! <strong>★ JOYA PRO Lifetime Activation Active</strong>. Thank you for your support! 🚀</span>`;
+    }
+  } else if(d.order_status==="pending"){
+    if(gate) gate.style.display="none";
+    show(box,false); show(confirm,false); show(pro,false); show(pending,true);
+    if(heroBuyBtn) heroBuyBtn.style.display="none";
+    if(heroProPill){ heroProPill.style.display="inline-flex"; heroProPill.textContent="⏳ Payment received — verification in progress"; }
+    if(proBadge) proBadge.style.display="none";
+    if(proTopBar) proTopBar.style.display="none";
+    if(navCta) navCta.style.display="inline-flex";
+    hideProNavLinks(false);
+    if(pricingSection) pricingSection.style.display="";
+  } else {
+    if(heroBuyBtn) heroBuyBtn.style.display="inline-flex";
+    if(heroProPill) heroProPill.style.display="none";
+    
+    // Show a beautiful Free Badge for free tier users
+    if(proBadge) {
+      proBadge.style.display="inline-flex";
+      proBadge.className = "free-badge-header";
+      proBadge.textContent = "★ FREE ACTIVE";
+    }
+    // Show a premium welcome top bar for free tier users
+    if(proTopBar) {
+      proTopBar.style.display="block";
+      proTopBar.innerHTML=`<span>✨ Welcome, <strong>${d.name || "Operator"}</strong>! You are currently on the <strong>Free Subscription Tier</strong>. <a href="#pricing" style="color: #ffd700; text-decoration: underline; margin-left: 6px; font-weight: 700;">Upgrade to Pro</a> to unlock unlimited AGI features! 🚀</span>`;
+    }
+    
+    if(navCta) {
+      navCta.style.display="inline-flex";
+      navCta.textContent = "Upgrade to Pro";
+      navCta.setAttribute('href', '#pricing');
+    }
+    hideProNavLinks(false);
+    if(pricingSection) pricingSection.style.display="";
+  }
+}
+function joyaLogout(){
+  fetch("/api/logout",{method:"POST"}).finally(()=>location.href="/login.html");
+}
+
+async function submitOrder(){
+  const msg=document.getElementById("cpMsg");
+  const method=document.getElementById("cpMethod").value;
+  const ref=document.getElementById("cpRef").value.trim();
+  msg.className="cp-msg"; msg.textContent="";
+  if(!ref){ msg.classList.add("err"); msg.textContent="Please enter your transaction/UPI reference."; return; }
+  msg.textContent="Submitting…";
+  const gateVal = document.getElementById("gatePrice") ? document.getElementById("gatePrice").textContent.replace("₹", "") : "299";
+  try{
+    const res=await fetch("/api/order",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({method,txn_ref:ref,amount:gateVal})});
+    const d=await res.json();
+    if(!res.ok){ msg.classList.add("err"); msg.textContent=d.error||"Failed. Try again."; return; }
+    
+    // Auto-update user state in current landing page session
+    if(window.JOYA_ME) {
+      window.JOYA_ME.is_pro = true;
+      window.JOYA_ME.plan_type = d.receipt.plan.toLowerCase();
+      applyProState(window.JOYA_ME);
+      try{ localStorage.setItem("joya_congrats_"+window.JOYA_ME.plan_type, "1"); }catch(_){}
+      if(window.showCongratsCelebration) showCongratsCelebration();
+    }
+    
+    const payBox = document.getElementById("payBox");
+    if(payBox) {
+      // Clear contents of payBox and render receipt dynamically
+      payBox.innerHTML = `
+        <div style="text-align: center; padding: 10px 0; color: #ffffff;">
+          <div style="font-size: 48px; margin-bottom: 10px; animation: bounce 1s infinite alternate;">🎉</div>
+          <h3 style="color: #ffffff; font-size: 20px; font-weight: bold; margin-bottom: 6px; background: transparent; border: none;">Upgrade Successful!</h3>
+          <p style="color: var(--soft); font-size: 13px; margin-bottom: 20px;">Your JOYA AI OS has been fully unlocked.</p>
+          
+          <div style="background: rgba(124, 120, 255, 0.05); border: 1px solid rgba(124, 120, 255, 0.15); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+              <span style="color: var(--soft);">Receipt ID</span>
+              <span style="color: #ffffff; font-weight: 600; font-family: monospace;">${d.receipt.receipt_id}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+              <span style="color: var(--soft);">Customer</span>
+              <span style="color: #ffffff; font-weight: 600;">${d.receipt.name}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+              <span style="color: var(--soft);">Plan Upgraded</span>
+              <span style="color: var(--pink); font-weight: bold;">JOYA ${d.receipt.plan}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+              <span style="color: var(--soft);">Amount Paid</span>
+              <span style="color: #ffffff; font-weight: bold;">${d.receipt.amount}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+              <span style="color: var(--soft);">Transaction Ref</span>
+              <span style="color: #ffffff; font-family: monospace; font-size: 12px;">${d.receipt.txn_ref}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 0; padding-bottom: 0;">
+              <span style="color: var(--soft);">Status</span>
+              <span style="background: #30d158; color: #000; font-size: 10px; font-weight: bold; border-radius: 4px; padding: 2px 8px;">SUCCESS / UNLOCKED</span>
+            </div>
+          </div>
+          
+          <button class="btn btn-primary" onclick="window.print()" style="margin-right: 10px; display: inline-block;">🖨️ Print Receipt</button>
+          <button class="btn btn-secondary" onclick="closeModal()" style="display: inline-block;">Close Window</button>
+          
+          <p style="font-size: 11px; color: var(--soft); margin-top: 14px;">A copy of this receipt has been emailed to <strong>${d.receipt.email}</strong></p>
+        </div>
+      `;
+    }
+  }catch(e){ msg.classList.add("err"); msg.textContent="Cannot reach server."; }
+}
+
+/* ============================================================
+   ⚙️ CONFIG — loaded dynamically from server .env
+   ============================================================ */
+const CONFIG = {
+  price:        "₹299",
+  amount:       "299",
+  priceStandard:"99",
+  pricePremium: "299",
+  upiId:        "9162132630@axl",
+  upiName:      "JOYA — Santosh Kumar",
+  upiNote:      "JOYA Pro Lifetime",
+  razorpayLink: "",
+  downloadLocal:"/download",
+  appVersion:   "1.0.0",
+};
+
+// Auto-load config from server .env (no hardcoding needed)
+(async function loadServerConfig(){
+  try{
+    const res = await fetch("/api/config");
+    if(res.ok){
+      const c = await res.json();
+      if(c.upiId)        CONFIG.upiId = c.upiId;
+      if(c.upiName)      CONFIG.upiName = c.upiName;
+      if(c.upiNote)      CONFIG.upiNote = c.upiNote;
+      if(c.razorpayLink) CONFIG.razorpayLink = c.razorpayLink;
+      if(c.pricePremium){ CONFIG.amount = c.pricePremium; CONFIG.price = "₹"+c.pricePremium; }
+      if(c.priceStandard) CONFIG.priceStandard = c.priceStandard;
+      if(c.pricePremium)  CONFIG.pricePremium = c.pricePremium;
+      if(c.appVersion)    CONFIG.appVersion = c.appVersion;
+      // Re-apply prices to DOM
+      ["heroPrice","proPrice","upiAmt","rzpAmt","gatePrice"].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=CONFIG.price;});
+      console.log("[CONFIG] Loaded from server .env ✔");
+    }
+  }catch(e){console.log("[CONFIG] Using built-in defaults");}
+})();
+
+// Apply prices (immediate fallback)
+["heroPrice","proPrice","upiAmt","rzpAmt","gatePrice"].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=CONFIG.price;});
+
+function unlockPayment(){
+  if(JOYA_ME && (JOYA_ME.is_pro || JOYA_ME.order_status==="pending")){ applyProState(JOYA_ME); return; }
+  const gate=document.getElementById("unlockGate"),box=document.getElementById("payBox"),
+        confirm=document.getElementById("confirmPay");
+  if(gate) gate.style.display="none";
+  if(box){ box.classList.remove("is-locked"); box.classList.add("reveal-in"); }
+  if(confirm){ confirm.classList.remove("is-locked"); }
+  initUpiCard();
+  if(box) box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+function upiLink(overrideAmount){
+  if(!CONFIG.upiId) return "";
+  const amt = overrideAmount || CONFIG.amount;
+  const note = overrideAmount ? "JOYA Pro Upgrade" : CONFIG.upiNote;
+  const p=new URLSearchParams({pa:CONFIG.upiId,pn:CONFIG.upiName,am:amt,cu:"INR",tn:note});
+  return "upi://pay?"+p.toString();
+}
+
+function makeQr(container,text,size,retryCount=0){
+  if(!container) return;
+  container.innerHTML="";
+  if(!text) {
+    container.innerHTML='<div class="qr-fallback">Add your UPI ID in the config to show the QR code.</div>';
+    return;
+  }
+  if(typeof QRCode==="undefined"){
+    if(retryCount < 10) {
+      container.innerHTML='<div class="qr-fallback">Loading secure QR engine...</div>';
+      setTimeout(() => makeQr(container,text,size,retryCount+1), 250);
+    } else {
+      container.innerHTML='<div class="qr-fallback">QR engine failed to load. Use the button below.</div>';
+    }
+    return;
+  }
+  try{ new QRCode(container,{text:text,width:size,height:size,correctLevel:QRCode.CorrectLevel.M}); }
+  catch(e){ container.innerHTML='<div class="qr-fallback">QR unavailable. Use the button below.</div>'; }
+}
+
+function initUpiCard(){
+  const gateVal = document.getElementById("gatePrice") ? document.getElementById("gatePrice").textContent : "";
+  const amt = gateVal.includes("200") ? "200" : (gateVal.includes("99") ? "99" : CONFIG.amount);
+  const link = upiLink(amt);
+  makeQr(document.getElementById("upiQr"),link,186);
+  const note=document.getElementById("upiIdNote");
+  if(note) note.textContent = CONFIG.upiId ? ("UPI ID: "+CONFIG.upiId) : "UPI ID: not configured yet";
+}
+window.addEventListener("load",()=>setTimeout(initUpiCard,120));
+
+function payUpi(){
+  const gateVal = document.getElementById("gatePrice") ? document.getElementById("gatePrice").textContent : "";
+  const isStandard = gateVal.includes("99");
+  const isUpgrade = gateVal.includes("200");
+  const amt = isStandard ? "99" : (isUpgrade ? "200" : "299");
+  const link = upiLink(amt);
+  if(!link){ alert("UPI ID is not configured yet. Please configure CONFIG.upiId in index.html."); return; }
+  window.location.href=link;
+}
+function payUpiSpecific(app){
+  const gateVal = document.getElementById("gatePrice") ? document.getElementById("gatePrice").textContent : "";
+  const isStandard = gateVal.includes("99");
+  const isUpgrade = gateVal.includes("200");
+  const amt = isStandard ? "99" : (isUpgrade ? "200" : "299");
+  const note = isStandard ? "JOYA Standard Lifetime" : (isUpgrade ? "JOYA Pro Upgrade" : "JOYA Pro Lifetime");
+  const params = `pa=${CONFIG.upiId}&pn=${encodeURIComponent(CONFIG.upiName)}&am=${amt}&cu=INR&tn=${encodeURIComponent(note)}`;
+  
+  if(!CONFIG.upiId){ alert("UPI ID is not configured yet. Please configure CONFIG.upiId in index.html."); return; }
+  
+  let link = `upi://pay?${params}`;
+  if (app === 'gpay') {
+    link = `gpay://upi/pay?${params}`;
+  } else if (app === 'phonepe') {
+    link = `phonepe://pay?${params}`;
+  } else if (app === 'paytm') {
+    link = `paytmmp://pay?${params}`;
+  } else if (app === 'bhim') {
+    link = `bhim://pay?${params}`;
+  }
+  
+  window.location.href = link;
+  
+  setTimeout(() => {
+    const msg = document.getElementById("cpMsg");
+    if(msg) {
+      msg.className = "cp-msg";
+      msg.textContent = "If the app didn't open automatically, scan the QR code above or open your app manually.";
+      msg.style.color = "var(--soft)";
+    }
+  }, 1500);
+}
+function payRazorpay(){
+  if(CONFIG.razorpayLink){ window.open(CONFIG.razorpayLink,"_blank","noopener"); }
+  else { alert("Razorpay link is not configured yet. Please configure CONFIG.razorpayLink in index.html."); }
+}
+function copyUpi(){
+  if(!CONFIG.upiId) return;
+  navigator.clipboard && navigator.clipboard.writeText(CONFIG.upiId);
+  const b=document.getElementById("copyBtn"); if(b){b.textContent="Copied!";setTimeout(()=>b.textContent="Copy",1400);}
+}
+
+/* ── Scroll reveal ── */
+const revealObserver=new IntersectionObserver(entries=>{
+  for(const entry of entries){
+    if(entry.isIntersecting){entry.target.classList.add("in");revealObserver.unobserve(entry.target);}
+  }
+},{threshold:.14});
+document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+
+/* ── Count up ── */
+const countObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const el=entry.target,to=Number(el.dataset.count||0);let n=0;const step=Math.max(1,to/42);
+    const timer=setInterval(()=>{n+=step;if(n>=to){n=to;clearInterval(timer)}el.textContent=Math.round(n)+(to===350?"+":to===100?"%":"");},24);
+    countObserver.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll("[data-count]").forEach(el=>countObserver.observe(el));
+
+/* ── Scroll progress bar + Nav scroll + Back to Top ── */
+const progress=document.getElementById("progress");
+const navEl=document.querySelector('nav');
+const backTop=document.getElementById('backTop');
+addEventListener("scroll",()=>{
+  const h=document.documentElement;
+  const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  progress.style.width=Math.min(100,Math.max(0,p))+"%";
+  // Nav scroll state
+  if(h.scrollTop > 60) navEl.classList.add('scrolled'); else navEl.classList.remove('scrolled');
+  // Back to top
+  if(h.scrollTop > 500) backTop.classList.add('show'); else backTop.classList.remove('show');
+},{passive:true});
+
+/* ── Detail card spotlight ── */
+document.querySelectorAll(".detail-card").forEach(card=>{
+  card.addEventListener("pointermove",e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");
+    card.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%");
+  });
+});
+
+/* ── 3D Tilt for Founder & Technology Cards ── */
+const tiltEffect = (el) => {
+  el.addEventListener("mousemove", e => {
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width/2;
+    const y = e.clientY - r.top - r.height/2;
+    el.style.transform = `rotateY(${x / 14}deg) rotateX(${-y / 14}deg) translateY(-6px)`;
+  });
+  el.addEventListener("mouseleave", () => {
+    el.style.transform = "none";
+  });
+};
+document.querySelectorAll(".card3d").forEach(tiltEffect);
+const fc = document.getElementById("founderCard");
+if(fc) tiltEffect(fc);
+
+function toggleFaq(q){q.parentElement.classList.toggle("open");q.parentElement.classList.toggle("anim");}
+function prefersReducedMotion(){return !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;}
+
+/* ── Cinematic Loader ── */
+(function(){
+  const loader = document.getElementById('loader');
+  if(!loader) return;
+  // Dismiss after animation completes — works even if load event already fired
+  setTimeout(() => loader.classList.add('done'), 1800);
+  // Safety fallback: force remove after 4s no matter what
+  setTimeout(() => { loader.classList.add('done'); loader.style.display='none'; }, 4000);
+})();
+
+/* ── Cursor Glow ── */
+(function(){
+  const glow = document.getElementById('cursorGlow');
+  if(!glow) return;
+  let mx=0, my=0, cx=0, cy=0;
+  document.addEventListener('pointermove', e => { mx=e.clientX; my=e.clientY; });
+  function trail() {
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    glow.style.left = cx + 'px';
+    glow.style.top = cy + 'px';
+    requestAnimationFrame(trail);
+  }
+  trail();
+})();
+
+/* ── Typewriter Hero ── */
+(function(){
+  const heroSub = document.getElementById('heroSub');
+  if(!heroSub) return;
+  const text = 'A premium voice AI companion that sees your screen, remembers your world, studies with you, and controls your PC — with permission, and 100% on your own machine.';
+  let i = 0;
+  const cursor = document.createElement('span');
+  cursor.className = 'typewriter-cursor';
+  heroSub.appendChild(cursor);
+  function type() {
+    if(i < text.length) {
+      heroSub.insertBefore(document.createTextNode(text[i]), cursor);
+      i++;
+      setTimeout(type, 22 + Math.random() * 18);
+    } else {
+      setTimeout(() => cursor.style.display = 'none', 2600);
+    }
+  }
+  // Start typing after loader finishes
+  setTimeout(type, 2200);
+})();
+
+/* ── Modal ── */
+function showModal(modal){
+  if(modal) modal.classList.add("open");
+}
+function openModal(kind){
+  if(prefersReducedMotion())document.body.classList.add('reduce-motion');
+  const modal=document.getElementById("modal"),title=document.getElementById("modalTitle"),
+        desc=document.getElementById("modalDesc"),body=document.getElementById("modalBody");
+  body.innerHTML="";
+
+  // Premium users never see a payment screen again
+  if((kind==="buy" || kind==="buy_standard" || kind==="buy_upgrade") && JOYA_ME && JOYA_ME.is_pro && JOYA_ME.plan_type==="premium"){
+    title.textContent="You're already a Pro member ★";
+    desc.textContent="JOYA Pro lifetime is active on your account. No further payment is ever needed.";
+    const dl=document.createElement("a");dl.className="btn btn-primary";dl.href="/download";dl.setAttribute("download","");
+    dl.textContent="⬇ Download JOYA";body.appendChild(dl);
+    const cl=document.createElement("button");cl.className="btn btn-secondary";
+    cl.textContent="Close";cl.onclick=closeModal;body.appendChild(cl);
+    showModal(modal);
+    return;
+  }
+
+  if(kind==="buy" || kind==="buy_standard" || kind==="buy_upgrade"){
+    const isStandard = kind === "buy_standard";
+    const isUpgrade = kind === "buy_upgrade";
+    const priceText = isStandard ? "₹99" : (isUpgrade ? "₹200" : CONFIG.price);
+    const itemText = isStandard ? "Standard Plan" : (isUpgrade ? "Pro Upgrade" : "Pro Plan");
+    title.textContent = `Buy JOYA ${itemText} — ${priceText}`;
+    desc.textContent = `Pay once, unlock ${itemText} for life. Choose UPI or Razorpay.`;
+    
+    // Set dynamic elements if available
+    const gP = document.getElementById("gatePrice"); if(gP) gP.textContent = priceText;
+    const uA = document.getElementById("upiAmt"); if(uA) uA.textContent = priceText;
+    const rA = document.getElementById("rzpAmt"); if(rA) rA.textContent = priceText;
+
+    const link = isStandard ? `upi://pay?pa=${CONFIG.upiId}&pn=${encodeURIComponent(CONFIG.upiName)}&am=99&cu=INR&tn=${encodeURIComponent("JOYA Standard Lifetime")}` : (isUpgrade ? upiLink("200") : upiLink());
+    if(link){
+      const qr=document.createElement("div");qr.className="modal-qr";qr.id="modalQr";body.appendChild(qr);
+      makeQr(qr,link,176);
+      const bar=document.createElement("div");bar.className="copybar";
+      bar.innerHTML='<span>UPI:</span> <b>'+CONFIG.upiId+'</b> <button id="copyBtn" onclick="copyUpi()">Copy</button>';
+      body.appendChild(bar);
+    }
+    const b1=document.createElement("button");b1.className="btn btn-primary";
+    b1.textContent="⚡ Pay with UPI";b1.onclick=payUpi;body.appendChild(b1);
+    const b2=document.createElement("button");b2.className="btn btn-secondary";
+    b2.textContent="💳 Pay with Razorpay";b2.onclick=payRazorpay;body.appendChild(b2);
+  }else if(kind==="profile"){
+    title.textContent="User Profile";
+    desc.textContent="Manage your local companion account settings.";
+    if(JOYA_ME){
+      const initial = JOYA_ME.name ? JOYA_ME.name.charAt(0).toUpperCase() : "U";
+      const badgeClass = JOYA_ME.is_pro ? "pro" : "free";
+      const badgeText = JOYA_ME.is_pro ? "★ Pro Member" : "Free Subscription";
+      const strength = JOYA_ME.is_pro ? "100%" : "40%";
+      const level = JOYA_ME.is_pro ? "Level 7 (Max Cognition)" : "Level 2 (Basic System)";
+      
+      const avatarHtml = JOYA_ME.profile_pic 
+        ? `<img id="modalAvatarImg" src="${JOYA_ME.profile_pic}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">` 
+        : `<span id="modalAvatarInitial" style="font-size:24px; font-weight:700;">${initial}</span>`;
+      
+      const card = document.createElement("div");
+      card.className = "profile-card";
+      card.innerHTML = `
+        <div class="profile-header">
+          <div class="profile-avatar" style="cursor:pointer; position:relative; overflow:hidden;" onclick="document.getElementById('profilePicInput').click()" title="Click to upload profile picture">
+            ${avatarHtml}
+            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.2s; border-radius:50%;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">
+              <span style="font-size:11px; color:#fff; font-weight:600;">Edit</span>
+            </div>
+          </div>
+          <div class="profile-title">
+            <h4>${JOYA_ME.name}</h4>
+            <p>${JOYA_ME.email}</p>
+            <span class="plan-badge ${badgeClass}">${badgeText}</span>
+          </div>
+        </div>
+        <input type="file" id="profilePicInput" style="display:none;" accept="image/*" onchange="uploadProfilePic(event)">
+        <div class="profile-details">
+          <div class="pd-item">
+            <span class="lbl">Phone</span>
+            <span class="val">${JOYA_ME.phone || "—"}</span>
+          </div>
+          <div class="pd-item">
+            <span class="lbl">Total Logins</span>
+            <span class="val">${JOYA_ME.login_count} sessions</span>
+          </div>
+          <div class="pd-item">
+            <span class="lbl">Created At</span>
+            <span class="val" style="font-size:12.5px;">${JOYA_ME.created_at || "—"}</span>
+          </div>
+          <div class="pd-item">
+            <span class="lbl">Last Active</span>
+            <span class="val" style="font-size:12.5px;">${JOYA_ME.last_login ? JOYA_ME.last_login.split(" ")[0] : "—"}</span>
+          </div>
+        </div>
+        <div class="profile-metrics">
+          <div class="pm-title">
+            <span>Cognitive Strength</span>
+            <span>${level}</span>
+          </div>
+          <div class="pm-bar-bg">
+            <div class="pm-bar-fg" id="profileBar"></div>
+          </div>
+        </div>
+        <div style="margin-top: 24px; display:flex; gap:10px;">
+          ${!JOYA_ME.is_pro ? '<button class="btn btn-primary" style="flex:1; margin:0;" onclick="closeModal(); document.getElementById(\'buy\').scrollIntoView({behavior:\'smooth\',block:\'center\'});">Upgrade to Pro</button>' : ''}
+          <button class="btn btn-secondary" style="flex:1; margin:0;" onclick="joyaLogout()">Logout Account</button>
+        </div>
+      `;
+      body.appendChild(card);
+      setTimeout(() => {
+        const bar = document.getElementById("profileBar");
+        if(bar) bar.style.width = strength;
+      }, 100);
+    }
+  }else{
+    title.textContent="Download JOYA Free";
+    desc.textContent="Choose your preferred download method below:";
+    const b1=document.createElement("a");b1.className="btn btn-primary";
+    b1.innerHTML="⬇ Download Launcher (.exe)";b1.href=CONFIG.downloadLocal;
+    b1.setAttribute("download","");body.appendChild(b1);
+    
+    const tipBox = document.createElement("div");
+    tipBox.style.background = "rgba(255, 179, 0, 0.08)";
+    tipBox.style.border = "1px solid rgba(255, 179, 0, 0.25)";
+    tipBox.style.borderRadius = "8px";
+    tipBox.style.padding = "10px 14px";
+    tipBox.style.marginTop = "14px";
+    tipBox.style.textAlign = "left";
+    
+    const tipTitle = document.createElement("h5");
+    tipTitle.style.color = "#ffb300";
+    tipTitle.style.fontSize = "12px";
+    tipTitle.style.fontWeight = "bold";
+    tipTitle.style.margin = "0 0 4px 0";
+    tipTitle.textContent = "⚠️ Windows SmartScreen Notice";
+    tipBox.appendChild(tipTitle);
+    
+    const tipText = document.createElement("p");
+    tipText.style.fontSize = "11px";
+    tipText.style.color = "var(--soft)";
+    tipText.style.margin = "0";
+    tipText.style.lineHeight = "1.4";
+    tipText.innerHTML = "Since the installer is unsigned, Windows may block it. " +
+                       "To install, click <strong>'More Info'</strong> in the blue popup and then click <strong>'Run anyway'</strong>.";
+    tipBox.appendChild(tipText);
+    body.appendChild(tipBox);
+
+  }
+  showModal(modal);
+}
+function closeModal(){
+  document.getElementById("modal").classList.remove("open");
+  document.body.classList.remove('reduce-motion');
+}
+
+async function uploadProfilePic(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = async function() {
+    const base64String = reader.result;
+    
+    const avatarContainer = document.querySelector(".profile-avatar");
+    if (avatarContainer) avatarContainer.style.opacity = "0.5";
+    
+    try {
+      const res = await fetch("/api/upload-profile-pic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: base64String })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.ok && data.profile_pic) {
+          JOYA_ME.profile_pic = data.profile_pic;
+          
+          const modalImg = document.getElementById("modalAvatarImg");
+          if (modalImg) {
+            modalImg.src = data.profile_pic;
+          } else {
+            const initialSpan = document.getElementById("modalAvatarInitial");
+            if (initialSpan) {
+              const newImg = document.createElement("img");
+              newImg.id = "modalAvatarImg";
+              newImg.src = data.profile_pic;
+              newImg.style.cssText = "width:100%; height:100%; border-radius:50%; object-fit:cover;";
+              initialSpan.replaceWith(newImg);
+            }
+          }
+          
+          // Instantly update navigation user-chip icon
+          const chip = document.getElementById("userChip");
+          if (chip) {
+            let img = chip.querySelector("img");
+            if (!img) {
+              const dot = chip.querySelector(".user-dot");
+              img = document.createElement("img");
+              img.style.cssText = "width:18px; height:18px; border-radius:50%; object-fit:cover; margin-right:4px; border:1px solid rgba(255,255,255,0.2);";
+              if (dot) dot.replaceWith(img);
+              else chip.prepend(img);
+            }
+            img.src = data.profile_pic;
+          }
+          
+          if (typeof showToast === 'function') {
+            showToast("Profile picture updated!", "success");
+          }
+        }
+      }
+    } catch(e) {
+      console.error(e);
+    } finally {
+      if (avatarContainer) avatarContainer.style.opacity = "1";
+    }
+  };
+  reader.readAsDataURL(file);
+}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+/* ── 3D hero core ── */
+const canvas=document.getElementById("stage3d");
+let renderer=null;
+try{
+if(!canvas || !window.THREE || matchMedia('(prefers-reduced-motion: reduce)').matches){
+  throw new Error('3D hero disabled or unavailable');
+}
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,100);
+camera.position.set(0,0,8);
+renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:"high-performance"});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+
+const group=new THREE.Group();scene.add(group);
+const metal=new THREE.MeshPhysicalMaterial({color:0xd7d7dc,metalness:.72,roughness:.18,clearcoat:1,clearcoatRoughness:.12});
+const glass=new THREE.MeshPhysicalMaterial({color:0x8f8bff,metalness:.15,roughness:.08,transparent:true,opacity:.36,transmission:.5,clearcoat:1});
+const violet=new THREE.MeshPhysicalMaterial({color:0xbf5af2,metalness:.25,roughness:.22,emissive:0x2a0b3a,emissiveIntensity:.5});
+
+const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.35,3),glass);group.add(core);
+const ring1=new THREE.Mesh(new THREE.TorusGeometry(2.2,.025,20,180),metal);
+const ring2=new THREE.Mesh(new THREE.TorusGeometry(2.72,.018,20,180),metal);
+const ring3=new THREE.Mesh(new THREE.TorusGeometry(3.1,.012,20,180),violet);
+ring1.rotation.x=Math.PI/2.7;ring2.rotation.y=Math.PI/2.4;ring3.rotation.x=Math.PI/2;ring3.rotation.z=.7;
+group.add(ring1,ring2,ring3);
+
+const nodes=new THREE.Group();
+for(let i=0;i<26;i++){
+  const a=(i/26)*Math.PI*2;const y=Math.sin(i*.9)*1.15;const r=2.9+Math.sin(i*1.7)*.28;
+  const node=new THREE.Mesh(new THREE.SphereGeometry(.045,16,16),i%5===0?violet:metal);
+  node.position.set(Math.cos(a)*r,y,Math.sin(a)*r);nodes.add(node);
+}
+group.add(nodes);
+
+// WebGL 3D dynamic floating space dust constellation
+const particleCount = innerWidth < 760 ? 80 : 140;
+const particlesGeo = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+for(let i=0; i<particleCount*3; i+=3) {
+  const theta = Math.random() * Math.PI * 2;
+  const phi = Math.acos((Math.random() * 2) - 1);
+  const dist = 3.5 + Math.random() * 2.8;
+  positions[i] = Math.sin(phi) * Math.cos(theta) * dist;
+  positions[i+1] = Math.sin(phi) * Math.sin(theta) * dist;
+  positions[i+2] = Math.cos(phi) * dist;
+}
+particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const particlesMat = new THREE.PointsMaterial({
+  color: 0x67e8f9,
+  size: 0.045,
+  transparent: true,
+  opacity: 0.85,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(particlesGeo, particlesMat);
+group.add(particles);
+
+scene.add(new THREE.AmbientLight(0xffffff,.65));
+const key=new THREE.DirectionalLight(0xffffff,1.25);key.position.set(3,4,5);scene.add(key);
+const indigoLight=new THREE.PointLight(0x6e6aff,2.2,12);indigoLight.position.set(-3,1.4,3);scene.add(indigoLight);
+const violetLight=new THREE.PointLight(0xbf5af2,1.5,10);violetLight.position.set(3,-1,2);scene.add(violetLight);
+
+let mouseX=0,mouseY=0;
+addEventListener("pointermove",e=>{mouseX=(e.clientX/innerWidth-.5);mouseY=(e.clientY/innerHeight-.5)});
+function resize(){
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);
+  group.position.x=innerWidth<860?0:2.1;
+  group.scale.setScalar(innerWidth<560?.72:innerWidth<860?.86:1);
+}
+addEventListener("resize",resize);resize();
+
+let _raf=0,_animPaused=false;
+function animate(t){
+  if(_animPaused){_raf=0;return;}
+  _raf=requestAnimationFrame(animate);
+  const s=t*.001;
+  core.rotation.x=s*.18+mouseY*.2;core.rotation.y=s*.28+mouseX*.25;
+  ring1.rotation.z=s*.24;ring2.rotation.x=s*.18;ring3.rotation.y=s*.16;
+  nodes.rotation.y=-s*.18;
+  particles.rotation.y=s*.06;
+  particles.rotation.x=s*.03;
+  group.rotation.y+=((mouseX*.18)-group.rotation.y)*.035;
+  group.rotation.x+=((-mouseY*.12)-group.rotation.x)*.035;
+  renderer.render(scene,camera);
+}
+function startHeroAnimation(){
+  if(_raf || _animPaused)return;
+  _raf=requestAnimationFrame(animate);
+}
+function pauseHeroAnimation(){
+  _animPaused=true;
+  if(_raf)cancelAnimationFrame(_raf);
+  _raf=0;
+}
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden)pauseHeroAnimation();
+  else{_animPaused=false;startHeroAnimation();}
+});
+window.addEventListener('focus',()=>{_animPaused=false;startHeroAnimation();});
+window.addEventListener('blur',pauseHeroAnimation);
+window.addEventListener('pagehide',()=>{
+  pauseHeroAnimation();
+  if(renderer)renderer.dispose();
+});
+startHeroAnimation();
+  /* ── Simulated Live Logs in Screen Mockup ── */
+  (function(){
+    const container = document.getElementById('simulatedLogs');
+    if(!container) return;
+    const templates = [
+      { text: '> screen analyze: active viewport capture', class: 'text-cyan' },
+      { text: '> processing voice spectrum... clear path', class: '' },
+      { text: '> cache syncd: 0.02ms cognitive speed', class: 'text-indigo' },
+      { text: '> security token: verified locally', class: 'text-green' },
+      { text: '> active cognition thread: idling', class: '' },
+      { text: '> matching pattern layer 18...', class: '' },
+      { text: '> ready for voice query...', class: 'text-green' }
+    ];
+    let idx = 0;
+    setInterval(() => {
+      const item = templates[idx % templates.length];
+      const log = document.createElement('div');
+      log.className = 'log-line ' + (item.class || '');
+      log.textContent = item.text;
+      container.appendChild(log);
+      if(container.children.length > 3) {
+        container.removeChild(container.firstChild);
+      }
+      idx++;
+    }, 2800);
+  })();
+
+  // 3D Card Tilt Micro-interactions
+  document.querySelectorAll('.detail-card, .card3d, .stat').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const xc = rect.width / 2;
+      const yc = rect.height / 2;
+      const angleX = (yc - y) / 8;
+      const angleY = (x - xc) / 8;
+      card.style.setProperty('--rx', `${angleX}deg`);
+      card.style.setProperty('--ry', `${angleY}deg`);
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+    });
+  });
+
+  // Interactive Live Laptop Mockup Screen Tab Simulator
+  window.simulateTab = function(tab) {
+    document.querySelectorAll('.side-btn').forEach(btn => btn.classList.remove('active'));
+    const consoleBox = document.getElementById('simulatedLogs');
+    const m1 = document.getElementById('simMetric1');
+    const m2 = document.getElementById('simMetric2');
+    if(!consoleBox) return;
+
+    if (tab === 'core') {
+      document.querySelectorAll('.side-btn')[0].classList.add('active');
+      consoleBox.innerHTML = `
+        <div class="log-line text-cyan">> initializing neural layers... [OK]</div>
+        <div class="log-line text-indigo">> loading local database core... [OK]</div>
+        <div class="log-line">> perception engine ready. listening.</div>
+      `;
+      if(m1) m1.textContent = "Active";
+      if(m2) { m2.textContent = "AES-256"; m2.className = "metric-value text-green"; }
+    } else if (tab === 'cog') {
+      document.querySelectorAll('.side-btn')[1].classList.add('active');
+      consoleBox.innerHTML = `
+        <div class="log-line text-indigo">> launching 7 cognitive layers...</div>
+        <div class="log-line text-cyan">> active persona: default (JOYA)</div>
+        <div class="log-line">> sqlite long-term memory indexed: 14 facts</div>
+      `;
+      if(m1) m1.textContent = "7 Layers";
+      if(m2) { m2.textContent = "SYNC'D"; m2.className = "metric-value text-cyan"; }
+    } else if (tab === 'auto') {
+      document.querySelectorAll('.side-btn')[2].classList.add('active');
+      consoleBox.innerHTML = `
+        <div class="log-line text-green">> autopilot: secure shell active</div>
+        <div class="log-line">> analyzing active window patterns...</div>
+        <div class="log-line text-cyan">> next action: idle waiting commands</div>
+      `;
+      if(m1) m1.textContent = "0% Load";
+      if(m2) { m2.textContent = "READY"; m2.className = "metric-value text-green"; }
+    } else if (tab === 'study') {
+      document.querySelectorAll('.side-btn')[3].classList.add('active');
+      consoleBox.innerHTML = `
+        <div class="log-line text-cyan">> study assistant initialized</div>
+        <div class="log-line">> loaded adaptive flashcard deck: Math</div>
+        <div class="log-line text-green">> streak: 4 days study logging</div>
+      `;
+      if(m1) m1.textContent = "90% target";
+      if(m2) { m2.textContent = "TRAINING"; m2.className = "metric-value text-indigo"; }
+    } else if (tab === 'exam') {
+      document.querySelectorAll('.side-btn')[4].classList.add('active');
+      consoleBox.innerHTML = `
+        <div class="log-line text-cyan">> exam readiness estimator ready</div>
+        <div class="log-line text-green">> calculated readiness score: 87.2% [HIGH]</div>
+        <div class="log-line">> active target: Chemistry Exam (Dec 15)</div>
+        <div class="log-line text-indigo">> AI Coach: Electrochemistry revision scheduled</div>
+      `;
+      if(m1) m1.textContent = "87.2% READY";
+      if(m2) { m2.textContent = "EXAM MODE"; m2.className = "metric-value text-green"; }
+    }
+  };
+
+  window.simulateReadinessCheck = function() {
+    const percentEl = document.getElementById('readinessPercent');
+    const barEl = document.getElementById('readinessBar');
+    const verdictEl = document.getElementById('readinessVerdict');
+    if(!percentEl || !barEl || !verdictEl) return;
+    
+    percentEl.textContent = "0.0%";
+    barEl.style.width = "0%";
+    verdictEl.textContent = "CALCULATING...";
+    verdictEl.style.color = "var(--cyan)";
+    
+    let current = 0;
+    const target = 87.2;
+    const interval = setInterval(() => {
+      current += 1.5;
+      if (current >= target) {
+        current = target;
+        clearInterval(interval);
+        verdictEl.textContent = "READY";
+        verdictEl.style.color = "var(--green)";
+      }
+      percentEl.textContent = current.toFixed(1) + "%";
+      barEl.style.width = current.toFixed(1) + "%";
+    }, 20);
+  };
+
+  /* ── Sandbox Actions ── */
+  let sandboxSpeaking = false;
+  window.runSandbox = function(action) {
+    const logs = document.getElementById('sandboxLogs');
+    const status = document.getElementById('sandboxStatus');
+    const indicator = document.getElementById('sandboxIndicator');
+    const eq = document.getElementById('sandboxEqualizer');
+    const scanner = document.getElementById('sandboxScanner');
+    
+    if (!logs) return;
+    
+    // Clear previous logs
+    logs.innerHTML = "";
+    
+    if (action === 'voice') {
+      if (sandboxSpeaking) {
+        window.speechSynthesis && window.speechSynthesis.cancel();
+      }
+      sandboxSpeaking = true;
+      
+      // UI state
+      status.textContent = "JOYA CORE : INITIALIZING VOICE SYNTHESIS";
+      indicator.style.background = "var(--indigo)";
+      indicator.style.boxShadow = "0 0 10px var(--indigo)";
+      eq.style.opacity = "1";
+      
+      addLogLine(logs, ">>> [VOICE] Requesting audio synthesis channel...", "text-indigo");
+      
+      setTimeout(() => {
+        const phrase = "Hello operator! I am JOYA, your secure local companion. I see you are inspecting my website core. Everything looks completely ready for your deployment.";
+        addLogLine(logs, ">>> [SPEAKING]: " + phrase, "text-cyan");
+        
+        // Native SpeechSynthesis
+        if ('speechSynthesis' in window) {
+          const utter = new SpeechSynthesisUtterance(phrase);
+          utter.rate = 1.0;
+          utter.pitch = 1.1;
+          utter.onend = () => {
+            eq.style.opacity = "0.3";
+            status.textContent = "JOYA CORE : LISTENING (IDLE)";
+            indicator.style.background = "var(--green)";
+            indicator.style.boxShadow = "0 0 10px var(--green)";
+            sandboxSpeaking = false;
+          };
+          window.speechSynthesis.speak(utter);
+        } else {
+          addLogLine(logs, ">>> [ERROR] Local speech synthesis not supported in this browser.", "text-pink");
+          eq.style.opacity = "0.3";
+          status.textContent = "JOYA CORE : LISTENING (IDLE)";
+          indicator.style.background = "var(--green)";
+          indicator.style.boxShadow = "0 0 10px var(--green)";
+          sandboxSpeaking = false;
+        }
+      }, 800);
+      
+    } else if (action === 'vision') {
+      status.textContent = "JOYA CORE : SCANNING PAGE GRID";
+      indicator.style.background = "var(--cyan)";
+      indicator.style.boxShadow = "0 0 10px var(--cyan)";
+      eq.style.opacity = "0.3";
+      
+      addLogLine(logs, ">>> [VISION] Starting viewport capture...", "text-cyan");
+      
+      // Laser scan animation
+      scanner.style.opacity = "1";
+      scanner.style.top = "0%";
+      let pos = 0;
+      const scanInterval = setInterval(() => {
+        pos += 4;
+        scanner.style.top = pos + "%";
+        if (pos >= 100) {
+          clearInterval(scanInterval);
+          scanner.style.opacity = "0";
+        }
+      }, 40);
+      
+      setTimeout(() => {
+        addLogLine(logs, ">>> [PERCEPTION] Grid scan output:", "text-green");
+        const title = document.title;
+        addLogLine(logs, "    - DOM title: \"" + title + "\"", "");
+        addLogLine(logs, "    - Layout Standard: Apple/Tesla Dark theme detected", "");
+        addLogLine(logs, "    - Active components: 3D Orb, Setup instructions, Orders DB", "");
+        addLogLine(logs, ">>> [SUCCESS] Processing complete. No issues found.", "text-green");
+        
+        status.textContent = "JOYA CORE : LISTENING (IDLE)";
+        indicator.style.background = "var(--green)";
+        indicator.style.boxShadow = "0 0 10px var(--green)";
+      }, 1200);
+      
+    } else if (action === 'automation') {
+      status.textContent = "JOYA CORE : INJECTING SAFE INSTRUCTION";
+      indicator.style.background = "var(--amber)";
+      indicator.style.boxShadow = "0 0 10px var(--amber)";
+      eq.style.opacity = "0.3";
+      
+      addLogLine(logs, ">>> [AUTOMATION] Launching local python shell...", "text-indigo");
+      
+      setTimeout(() => {
+        addLogLine(logs, ">>> [SHELL] python -u actions/safe_control.py", "");
+      }, 400);
+      
+      setTimeout(() => {
+        addLogLine(logs, ">>> [INJECT] keyboard.type('Hello, JOYA here!')", "text-cyan");
+      }, 900);
+      
+      setTimeout(() => {
+        addLogLine(logs, ">>> [INJECT] file.write('diagnostic.txt', 'Verified OK')", "text-cyan");
+      }, 1400);
+      
+      setTimeout(() => {
+        addLogLine(logs, ">>> [STATUS] Action complete. Process exited cleanly (0).", "text-green");
+        status.textContent = "JOYA CORE : LISTENING (IDLE)";
+        indicator.style.background = "var(--green)";
+        indicator.style.boxShadow = "0 0 10px var(--green)";
+      }, 2000);
+    } else if (action === 'cognition') {
+      status.textContent = "JOYA CORE : RETRIEVING MEMORY SYNAPSES";
+      indicator.style.background = "var(--violet)";
+      indicator.style.boxShadow = "0 0 10px var(--violet)";
+      eq.style.opacity = "0.7";
+      
+      addLogLine(logs, ">>> [COGNITION] Interrogating local SQLite relationship matrix...", "text-indigo");
+      
+      setTimeout(() => {
+        addLogLine(logs, ">>> [MEMORY] Relationship Weights Map Loaded:", "text-cyan");
+        addLogLine(logs, "    🧠 [Owner Profile: 'Anish' / 'Sir'] -> Synapse Weight: 99.4%", "text-green");
+        addLogLine(logs, "    📚 [Context: 'Physics Study'] -> Synapse Weight: 91.2%", "");
+        addLogLine(logs, "    💻 [Context: 'Vaporwave HUD/UI'] -> Synapse Weight: 88.7%", "");
+        addLogLine(logs, ">>> [COGNITION] Active personality: 'Elite Helpful Companion'", "text-violet");
+      }, 700);
+      
+      setTimeout(() => {
+        if ('speechSynthesis' in window) {
+          const utter = new SpeechSynthesisUtterance("Cognitive synapse scan complete. Active personality profile is stable and ready.");
+          utter.rate = 1.05;
+          utter.pitch = 1.1;
+          utter.onend = () => {
+            eq.style.opacity = "0.3";
+            status.textContent = "JOYA CORE : LISTENING (IDLE)";
+            indicator.style.background = "var(--green)";
+            indicator.style.boxShadow = "0 0 10px var(--green)";
+          };
+          window.speechSynthesis.speak(utter);
+        } else {
+          eq.style.opacity = "0.3";
+          status.textContent = "JOYA CORE : LISTENING (IDLE)";
+          indicator.style.background = "var(--green)";
+          indicator.style.boxShadow = "0 0 10px var(--green)";
+        }
+      }, 1500);
+    }
+  };
+
+  function addLogLine(logsElement, text, className) {
+    const line = document.createElement('div');
+    line.className = 'log-line ' + (className || '');
+    line.textContent = text;
+    logsElement.appendChild(line);
+  }
+
+  // Celebration/Congrats Overlay Helpers
+  let confettiRAF = null;
+  function startConfetti() {
+    const cv = document.getElementById("congratsConfetti");
+    if(!cv) return;
+    const ctx2 = cv.getContext("2d");
+    cv.width = innerWidth; cv.height = innerHeight;
+    const colors = ["#ffd700","#ff8c00","#6e6aff","#bf5af2","#30d158","#ffffff"];
+    const parts = Array.from({length:160}, () => ({
+      x: Math.random()*cv.width,
+      y: -20 - Math.random()*cv.height*0.5,
+      w: 6+Math.random()*6, h: 10+Math.random()*8,
+      vy: 2+Math.random()*3.5, vx: -1.2+Math.random()*2.4,
+      rot: Math.random()*Math.PI*2, vr: -0.12+Math.random()*0.24,
+      c: colors[(Math.random()*colors.length)|0]
+    }));
+    const t0 = performance.now();
+    (function tick(t){
+      ctx2.clearRect(0,0,cv.width,cv.height);
+      for(const p of parts){
+        p.y += p.vy; p.x += p.vx + Math.sin(p.y*0.02); p.rot += p.vr;
+        if(p.y > cv.height+20){ p.y = -20; p.x = Math.random()*cv.width; }
+        ctx2.save(); ctx2.translate(p.x,p.y); ctx2.rotate(p.rot);
+        ctx2.fillStyle = p.c; ctx2.globalAlpha = 0.9;
+        ctx2.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx2.restore();
+      }
+      if(t - t0 < 9000) confettiRAF = requestAnimationFrame(tick);
+      else ctx2.clearRect(0,0,cv.width,cv.height);
+    })(t0);
+  }
+  function stopConfetti(){
+    if(confettiRAF) cancelAnimationFrame(confettiRAF);
+    confettiRAF = null;
+    const cv = document.getElementById("congratsConfetti");
+    if(cv) cv.getContext("2d").clearRect(0,0,cv.width,cv.height);
+  }
+  window.showCongratsCelebration = function() {
+    const overlay = document.getElementById("congratsOverlay");
+    if(overlay) {
+      overlay.style.display = "flex";
+      overlay.offsetHeight; // force repaint
+      overlay.style.opacity = "1";
+      overlay.style.pointerEvents = "auto";
+      const card = overlay.querySelector(".congrats-card");
+      if(card) card.style.transform = "scale(1)";
+      startConfetti();
+    }
+  };
+
+  window.closeCongrats = function() {
+    const overlay = document.getElementById("congratsOverlay");
+    if(overlay) {
+      overlay.style.opacity = "0";
+      overlay.style.pointerEvents = "none";
+      const card = overlay.querySelector(".congrats-card");
+      if(card) card.style.transform = "scale(0.85)";
+      setTimeout(() => {
+        overlay.style.display = "none";
+        stopConfetti();
+      }, 800);
+    }
+  };
+}catch(e){
+  if(canvas) canvas.style.display='none';
+  const el=document.createElement('div');
+  el.className='orb-fallback';
+  el.innerHTML='<div class="orb"><span class="orb-ring r1"></span><span class="orb-ring r2"></span><span class="orb-ring r3"></span><span class="orb-core"></span></div>';
+  canvas && canvas.parentElement && canvas.parentElement.appendChild(el);
+}
+</script>
+
+<!-- Celebration/Congrats Overlay (Tesla/Apple Style) -->
+<div id="congratsOverlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9999; display:none; flex-direction:column; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.8s ease-in-out; backdrop-filter:blur(18px);">
+  <canvas id="congratsConfetti" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none;"></canvas>
+  <div class="congrats-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,215,0,0.2); border-radius:32px; padding:48px 64px; text-align:center; max-width:540px; box-shadow:0 30px 70px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05); backdrop-filter:blur(30px); transform:scale(0.85); transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+    <!-- Glowing Ring Animation -->
+    <div style="position:relative; width:120px; height:120px; margin:0 auto 28px;">
+      <div style="position:absolute; inset:0; border-radius:50%; border:2px solid rgba(255,215,0,0.15); animation:pulseRingOuter 3s infinite alternate;"></div>
+      <div style="position:absolute; inset:12px; border-radius:50%; border:3px solid #ffd700; display:grid; place-items:center; box-shadow:0 0 35px rgba(255,215,0,0.45); animation:pulseRingInner 2s infinite alternate;">
+        <span style="font-size:38px; color:#ffd700; animation:starSpin 4s infinite linear;">★</span>
+      </div>
+    </div>
+    <h2 style="font-family:var(--font-display); font-size:36px; font-weight:700; color:#fff; margin-bottom:12px; letter-spacing:-0.03em;">Congratulations</h2>
+    <h3 style="font-size:18px; font-weight:600; color:#ffd700; margin-bottom:24px; text-transform:uppercase; letter-spacing:0.08em;">JOYA Pro Unlocked</h3>
+    <p style="color:#a1a1a6; font-size:15px; line-height:1.6; margin-bottom:32px;">Every cognition layer, autonomous PC control system, and premium learning tools are now completely activated on your machine. Welcome to the future — thank you for choosing JOYA.</p>
+    <button class="btn btn-primary" style="background:linear-gradient(135deg, #ffd700, #ff8c00); color:#000; font-weight:700; border:none; padding:12px 36px; border-radius:999px; cursor:pointer;" onclick="closeCongrats()">Initialize JOYA Pro</button>
+  </div>
+</div>
+</body>
+</html>

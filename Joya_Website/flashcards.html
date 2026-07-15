@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JOYA Mark XXXIX — Interactive Flashcards</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+    
+    .header-section {
+      text-align: center;
+      margin-bottom: 30px;
+      z-index: 10;
+    }
+    
+    .header-section h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 0%, #a1a1a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .counter {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .progress-bar-container {
+      width: min(85vw, 560px);
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 99px;
+      margin: 16px auto 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #6e6aff, #bf5af2, #64d2ff);
+      transition: width 0.5s cubic-bezier(0.15, 1, 0.3, 1);
+    }
+
+    .scene {
+      width: min(90vw, 580px);
+      height: min(50vh, 360px);
+      perspective: 2000px;
+      margin: 20px 0;
+      z-index: 10;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.15, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: rgba(11, 14, 26, 0.85);
+      border: 1px solid rgba(110, 106, 255, 0.2);
+      box-shadow: var(--shadow-lg), 0 0 40px rgba(110, 106, 255, 0.05);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+    }
+
+    .face.back {
+      transform: rotateY(180deg);
+      border-color: rgba(191, 90, 242, 0.25);
+      background: rgba(22, 11, 38, 0.85);
+      box-shadow: var(--shadow-lg), 0 0 40px rgba(191, 90, 242, 0.05);
+    }
+
+    .topic-badge {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #64d2ff;
+      background: rgba(100, 210, 255, 0.08);
+      border: 1px solid rgba(100, 210, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+
+    .card-label {
+      position: absolute;
+      bottom: 24px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .card-text {
+      font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+      font-weight: 600;
+      line-height: 1.4;
+      max-width: 90%;
+      color: #ffffff;
+    }
+
+    .controls-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      z-index: 10;
+      width: min(90vw, 580px);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-control {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s cubic-bezier(0.15, 1, 0.3, 1);
+    }
+
+    .btn-control:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .grading-buttons {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .btn-grade {
+      flex: 1;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.15, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-grade.correct {
+      background: rgba(48, 209, 88, 0.1);
+      border: 1px solid rgba(48, 209, 88, 0.25);
+      color: #30d158;
+    }
+
+    .btn-grade.correct:hover {
+      background: #30d158;
+      color: #000000;
+    }
+
+    .btn-grade.incorrect {
+      background: rgba(255, 69, 58, 0.1);
+      border: 1px solid rgba(255, 69, 58, 0.25);
+      color: #ff453a;
+    }
+
+    .btn-grade.incorrect:hover {
+      background: #ff453a;
+      color: #ffffff;
+    }
+
+    .completion-card {
+      text-align: center;
+      padding: 40px;
+      display: none;
+      z-index: 10;
+    }
+
+    .completion-card h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #30d158, #64d2ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .completion-card p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      padding: 12px 24px;
+      background: rgba(11, 14, 26, 0.9);
+      border: 1px solid rgba(110, 106, 255, 0.3);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.15, 1, 0.3, 1);
+    }
+    
+    .writebox {
+      z-index: 10;
+      width: min(90vw, 580px);
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: stretch;
+    }
+    .writebox textarea {
+      min-height: 54px;
+      resize: vertical;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      padding: 12px 14px;
+      font: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+    }
+    .writebox textarea:focus {
+      border-color: rgba(110, 106, 255, 0.4);
+    }
+    .writebox textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .feedback {
+      z-index: 10;
+      margin-top: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #64d2ff;
+      min-height: 18px;
+      text-align: center;
+      max-width: min(90vw, 580px);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-section">
+    <h1>JOYA study space</h1>
+    <div class="counter" id="counter">Loading Deck...</div>
+    <div class="progress-bar-container">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="scene" id="scene">
+    <div class="card" id="card" onclick="flipCard()">
+      <div class="face front">
+        <span class="topic-badge" id="topicBadge">Topic</span>
+        <div class="card-text" id="frontText">Question</div>
+        <span class="card-label">Question · tap to flip</span>
+      </div>
+      <div class="face back">
+        <span class="topic-badge" style="color:#bf5af2;background:rgba(191,90,242,0.08);border-color:rgba(191,90,242,0.2)" id="backTopicBadge">Topic</span>
+        <div class="card-text" id="backText">Answer</div>
+        <span class="card-label">Answer · tap to flip back</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="completion-card glass-card" id="completionCard">
+    <h2>🎉 Deck Complete!</h2>
+    <p>You have reviewed all flashcards. AI is waiting for your next revision session.</p>
+    <button class="btn-primary" onclick="restartDeck()">🔄 Study Again</button>
+  </div>
+
+  <div class="writebox" id="writebox">
+    <textarea id="written" placeholder="Type your answer here to let AI evaluate it..."></textarea>
+    <button class="btn-control" style="border-radius:14px;" onclick="checkWritten()">Check Answer</button>
+  </div>
+  <div class="feedback" id="feedback"></div>
+
+  <div class="controls-container" id="controls">
+    <div class="grading-buttons">
+      <button class="btn-grade incorrect" onclick="grade(1)">📖 Incorrect</button>
+      <button class="btn-grade correct" onclick="grade(4)">✅ Correct</button>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn-control" onclick="prevCard()">← Prev</button>
+      <button class="btn-control" onclick="flipCard()">Flip</button>
+      <button class="btn-control" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let cards = [];
+    let currentIndex = 0;
+    let flipped = false;
+
+    const card = document.getElementById('card');
+    const scene = document.getElementById('scene');
+    const controls = document.getElementById('controls');
+    const completionCard = document.getElementById('completionCard');
+    const toast = document.getElementById('toast');
+
+    async function loadFlashcards() {
+      try {
+        const res = await fetch('/api/flashcards');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.cards && data.cards.length > 0) {
+            cards = data.cards;
+            restartDeck();
+            return;
+          }
+        }
+      } catch (e) {
+        console.error("Fetch error:", e);
+      }
+      
+      // Fallback
+      cards = [
+        { id: 1, topic: "Physics", question: "What is Newton's second law?", answer: "Force equals mass times acceleration (F = ma)." },
+        { id: 2, topic: "Chemistry", question: "What is the molecular formula of water?", answer: "H₂O." }
+      ];
+      restartDeck();
+    }
+
+    function renderCard() {
+      if (cards.length === 0) return;
+      const c = cards[currentIndex];
+      
+      document.getElementById('topicBadge').textContent = c.topic || 'General';
+      document.getElementById('backTopicBadge').textContent = c.topic || 'General';
+      document.getElementById('frontText').textContent = c.question || c.q || '';
+      document.getElementById('backText').textContent = c.answer || c.a || '';
+      
+      document.getElementById('counter').textContent = `${currentIndex + 1} / ${cards.length}`;
+      const percentage = ((currentIndex + 1) / cards.length) * 100;
+      document.getElementById('progressFill').style.width = `${percentage}%`;
+      
+      flipped = false;
+      card.classList.remove('flipped');
+      
+      // Reset written answer & feedback
+      document.getElementById('written').value = '';
+      document.getElementById('feedback').textContent = '';
+    }
+
+    async function checkWritten() {
+      if (cards.length === 0) return;
+      const c = cards[currentIndex];
+      const written = document.getElementById('written');
+      const got = (written && written.value || '').trim();
+      const fb = document.getElementById('feedback');
+      if (!got) {
+        fb.textContent = '⚠️ Type an answer first.';
+        return;
+      }
+      fb.textContent = '⏳ AI is evaluating your answer...';
+      
+      try {
+        const res = await fetch('/api/check-answer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            question: c.question || c.q,
+            correct_answer: c.answer || c.a,
+            user_answer: got
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          fb.innerHTML = `🎯 <strong>AI Evaluation: ${data.label} (${data.score}%)</strong><br>${data.explanation}`;
+        } else {
+          fb.textContent = '❌ AI evaluation error. Double check local answers.';
+        }
+      } catch (e) {
+        fb.textContent = '❌ Offline / server connection lost.';
+      }
+    }
+
+    function flipCard() {
+      flipped = !flipped;
+      card.classList.toggle('flipped', flipped);
+    }
+
+    function nextCard() {
+      if (currentIndex < cards.length - 1) {
+        currentIndex++;
+        renderCard();
+      } else {
+        showCompletion();
+      }
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderCard();
+      }
+    }
+
+    function showCompletion() {
+      scene.style.display = 'none';
+      controls.style.display = 'none';
+      document.getElementById('writebox').style.display = 'none';
+      document.getElementById('feedback').style.display = 'none';
+      completionCard.style.display = 'block';
+    }
+
+    function restartDeck() {
+      currentIndex = 0;
+      scene.style.display = 'block';
+      controls.style.display = 'flex';
+      document.getElementById('writebox').style.display = 'grid';
+      document.getElementById('feedback').style.display = 'block';
+      completionCard.style.display = 'none';
+      renderCard();
+    }
+
+    function grade(score) {
+      showToast(score === 4 ? "✅ Logged as Correct" : "📖 Logged as Incorrect");
+      setTimeout(nextCard, 500);
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+      }, 1500);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        flipCard();
+      } else if (e.code === 'ArrowRight') {
+        nextCard();
+      } else if (e.code === 'ArrowLeft') {
+        prevCard();
+      }
+    });
+
+    window.onload = loadFlashcards;
+  </script>
+</body>
+</html>
