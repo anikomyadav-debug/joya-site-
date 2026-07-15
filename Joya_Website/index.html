@@ -1691,7 +1691,7 @@ nav.scrolled { border-bottom-color: rgba(124,120,255,.1); box-shadow: 0 4px 24px
         <h3>You're a JOYA Pro member 🎉</h3>
         <p>Every cognition layer, Ultron, autonomous agency & premium flashcards are unlocked. Thank you!</p>
       </div>
-      <a class="btn btn-primary" href="/download" download>⬇ Download JOYA</a>
+      <a class="btn btn-primary" href="https://github.com/anikomyadav-debug/joya-site-/releases/download/V1.0.1/JOYA_Setup.exe" download>⬇ Download JOYA</a>
     </div>
 
     <!-- Pending Banner -->
@@ -2045,7 +2045,7 @@ const CONFIG = {
   upiName:      "JOYA — Santosh Kumar",
   upiNote:      "JOYA Pro Lifetime",
   razorpayLink: "",
-  downloadLocal:"/download",
+  downloadLocal:"https://github.com/anikomyadav-debug/joya-site-/releases/download/V1.0.1/JOYA_Setup.exe",
   appVersion:   "1.0.0",
 };
 
@@ -2297,7 +2297,7 @@ function openModal(kind){
   if((kind==="buy" || kind==="buy_standard" || kind==="buy_upgrade") && JOYA_ME && JOYA_ME.is_pro && JOYA_ME.plan_type==="premium"){
     title.textContent="You're already a Pro member ★";
     desc.textContent="JOYA Pro lifetime is active on your account. No further payment is ever needed.";
-    const dl=document.createElement("a");dl.className="btn btn-primary";dl.href="/download";dl.setAttribute("download","");
+    const dl=document.createElement("a");dl.className="btn btn-primary";dl.href="https://github.com/anikomyadav-debug/joya-site-/releases/download/V1.0.1/JOYA_Setup.exe";dl.setAttribute("download","");
     dl.textContent="⬇ Download JOYA";body.appendChild(dl);
     const dl2=document.createElement("a");dl2.className="btn btn-secondary";dl2.href="/JOYA_AI_OS.zip";dl2.setAttribute("download","");
     dl2.style.marginTop = "10px";
