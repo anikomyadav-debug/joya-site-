@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /login.html
 Disallow: /admin.html
 Disallow: /api/
-Sitemap: /sitemap.xml
+
+Sitemap: https://joya-site-1.onrender.com/sitemap.xml

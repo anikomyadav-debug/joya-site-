@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="google-site-verification" content="eIglTIlw7OPvQohGqm8CLw4ijRacw2GImArm7c3PbQU" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JOYA Mark XXXIX — Human AI Companion</title>
@@ -1406,6 +1407,27 @@ nav.scrolled { border-bottom-color: rgba(124,120,255,.1); box-shadow: 0 4px 24px
         </div>
       </div>
     </div>
+    
+    <div class="flash-demo" style="margin-top: 80px; border-top: 1px solid var(--line); padding-top: 80px;">
+      <div class="pomodoro-timer-ui reveal" style="display: flex; justify-content: center; align-items: center;">
+        <div style="width: 320px; height: 320px; border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)); border: 1px solid var(--line2); box-shadow: 0 40px 100px rgba(0,0,0,0.5); padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: -100px; left: -100px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,107,107,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+          <small id="pomoLabel" style="color: #ff6b6b; font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 0.15em; margin-bottom: 12px;">POMODORO FOCUS SESSION</small>
+          <strong id="pomoTime" style="font-family: var(--font-display); font-size: 68px; color: var(--ink); font-weight: 700; margin: 10px 0; text-shadow: 0 0 20px rgba(255,107,107,0.3);">25:00</strong>
+          <span id="pomoStatus" style="font-size: 12px; color: var(--muted); margin-bottom: 20px;">Ready to start study focus</span>
+          <div style="display: flex; gap: 12px;">
+            <button id="pomoBtn" onclick="togglePomodoro()" class="btn btn-secondary" style="padding: 10px 20px; background: #ff6b6b; border-color: #ff6b6b; color: #fff; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">Start Focus</button>
+            <button onclick="resetPomodoro()" class="btn btn-secondary" style="padding: 10px 20px; border-radius: 12px; font-weight: 700; cursor: pointer;">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="section-head reveal">
+        <div class="kicker">AI Focus Coach</div>
+        <h2>Smart study breaks, zero burnout.</h2>
+        <p>JOYA monitors study cycles, automatically sets custom break timers based on subject hardness, and guides you with physical wellness triggers.</p>
+        <div class="cta-row"><button class="btn btn-secondary" onclick="simulateFocusCoachTip()">Get Focus Tip</button></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2631,6 +2653,8 @@ startHeroAnimation();
 
   // Interactive Live Laptop Mockup Screen Tab Simulator
   window.simulateTab = function(tab) {
+    if (window.neuralAnimationId) cancelAnimationFrame(window.neuralAnimationId);
+    if (window.radarAnimationId) cancelAnimationFrame(window.radarAnimationId);
     document.querySelectorAll('.side-btn').forEach(btn => btn.classList.remove('active'));
     const consoleBox = document.getElementById('simulatedLogs');
     const m1 = document.getElementById('simMetric1');
@@ -2649,21 +2673,23 @@ startHeroAnimation();
     } else if (tab === 'cog') {
       document.querySelectorAll('.side-btn')[1].classList.add('active');
       consoleBox.innerHTML = `
-        <div class="log-line text-indigo">> launching 7 cognitive layers...</div>
+        <canvas id="neuralNetCanvas" style="width:100%; height:110px; display:block; margin-bottom:8px; border-radius:12px; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.06);"></canvas>
+        <div class="log-line text-indigo">> cognitive engine active: hover/click to interact</div>
         <div class="log-line text-cyan">> active persona: default (JOYA)</div>
-        <div class="log-line">> sqlite long-term memory indexed: 14 facts</div>
       `;
+      setTimeout(startNeuralNet, 50);
       if(m1) m1.textContent = "7 Layers";
       if(m2) { m2.textContent = "SYNC'D"; m2.className = "metric-value text-cyan"; }
     } else if (tab === 'auto') {
       document.querySelectorAll('.side-btn')[2].classList.add('active');
       consoleBox.innerHTML = `
-        <div class="log-line text-green">> autopilot: secure shell active</div>
-        <div class="log-line">> analyzing active window patterns...</div>
-        <div class="log-line text-cyan">> next action: idle waiting commands</div>
+        <canvas id="radarCanvas" style="width:100%; height:110px; display:block; margin-bottom:8px; border-radius:12px; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.06);"></canvas>
+        <div class="log-line text-green">> threat radar scanning: active</div>
+        <div class="log-line text-cyan">> firewall level: premium active</div>
       `;
+      setTimeout(startRadarScan, 50);
       if(m1) m1.textContent = "0% Load";
-      if(m2) { m2.textContent = "READY"; m2.className = "metric-value text-green"; }
+      if(m2) { m2.textContent = "SECURE"; m2.className = "metric-value text-green"; }
     } else if (tab === 'study') {
       document.querySelectorAll('.side-btn')[3].classList.add('active');
       consoleBox.innerHTML = `
@@ -2678,8 +2704,8 @@ startHeroAnimation();
       consoleBox.innerHTML = `
         <div class="log-line text-cyan">> exam readiness estimator ready</div>
         <div class="log-line text-green">> calculated readiness score: 87.2% [HIGH]</div>
+        <div class="log-line text-indigo">> AI Focus Coach: 25-minute Pomodoro session tracked</div>
         <div class="log-line">> active target: Chemistry Exam (Dec 15)</div>
-        <div class="log-line text-indigo">> AI Coach: Electrochemistry revision scheduled</div>
       `;
       if(m1) m1.textContent = "87.2% READY";
       if(m2) { m2.textContent = "EXAM MODE"; m2.className = "metric-value text-green"; }
@@ -2710,6 +2736,320 @@ startHeroAnimation();
       percentEl.textContent = current.toFixed(1) + "%";
       barEl.style.width = current.toFixed(1) + "%";
     }, 20);
+  };
+
+  let pomoInterval = null;
+  let pomoMinutes = 25;
+  let pomoSeconds = 0;
+  let pomoRunning = false;
+
+  window.togglePomodoro = function() {
+    const btn = document.getElementById('pomoBtn');
+    const timeEl = document.getElementById('pomoTime');
+    const statusEl = document.getElementById('pomoStatus');
+    const labelEl = document.getElementById('pomoLabel');
+    if(!btn || !timeEl || !statusEl || !labelEl) return;
+
+    if (pomoRunning) {
+      clearInterval(pomoInterval);
+      pomoRunning = false;
+      btn.textContent = "Resume Focus";
+      btn.style.background = "var(--indigo)";
+      btn.style.borderColor = "var(--indigo)";
+      statusEl.textContent = "Focus session paused";
+    } else {
+      pomoRunning = true;
+      btn.textContent = "Pause Focus";
+      btn.style.background = "#ff4757";
+      btn.style.borderColor = "#ff4757";
+      statusEl.textContent = "Deep Focus: Study active. Distractions muted.";
+      
+      pomoInterval = setInterval(() => {
+        if (pomoSeconds === 0) {
+          if (pomoMinutes === 0) {
+            clearInterval(pomoInterval);
+            pomoRunning = false;
+            btn.textContent = "Start Session";
+            btn.style.background = "#ff6b6b";
+            statusEl.textContent = "Focus session complete! Time for a short break.";
+            alert("Focus session complete! Take a well-deserved 5-minute break.");
+            return;
+          }
+          pomoMinutes--;
+          pomoSeconds = 59;
+        } else {
+          pomoSeconds--;
+        }
+        
+        const mStr = pomoMinutes.toString().padStart(2, '0');
+        const sStr = pomoSeconds.toString().padStart(2, '0');
+        timeEl.textContent = `${mStr}:${sStr}`;
+      }, 1000);
+    }
+  };
+
+  window.resetPomodoro = function() {
+    clearInterval(pomoInterval);
+    pomoRunning = false;
+    pomoMinutes = 25;
+    pomoSeconds = 0;
+    
+    const btn = document.getElementById('pomoBtn');
+    const timeEl = document.getElementById('pomoTime');
+    const statusEl = document.getElementById('pomoStatus');
+    if(btn) { btn.textContent = "Start Focus"; btn.style.background = "#ff6b6b"; btn.style.borderColor = "#ff6b6b"; }
+    if(timeEl) timeEl.textContent = "25:00";
+    if(statusEl) statusEl.textContent = "Ready to start study focus";
+  };
+
+  const focusTips = [
+    "AI Coach: Take a deep breath. 20-20-20 rule: Look 20 feet away for 20 seconds.",
+    "AI Coach: Hydrate now! Drinking water boosts cognitive processing by 14%.",
+    "AI Coach: Stand up and stretch your back. Muscle stiffness drops attention spans.",
+    "AI Coach: Hardest topic first! Tackle Math/Physics formulas in the first 15 mins."
+  ];
+
+  window.simulateFocusCoachTip = function() {
+    const randomTip = focusTips[Math.floor(Math.random() * focusTips.length)];
+    const statusEl = document.getElementById('pomoStatus');
+    if(statusEl) {
+      statusEl.textContent = randomTip;
+      statusEl.style.color = "var(--cyan)";
+      setTimeout(() => { statusEl.style.color = "var(--muted)"; }, 4000);
+    }
+  };
+
+  window.neuralAnimationId = null;
+  
+  window.startNeuralNet = function() {
+    const canvas = document.getElementById('neuralNetCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight || 110;
+    
+    const nodes = [];
+    const connections = [];
+    const particles = [];
+    
+    const layers = [3, 4, 2];
+    const layerSpacing = canvas.width / (layers.length + 1);
+    
+    layers.forEach((count, lIdx) => {
+      const x = layerSpacing * (lIdx + 1);
+      const nodeSpacing = canvas.height / (count + 1);
+      for(let i=0; i<count; i++) {
+        const y = nodeSpacing * (i + 1);
+        nodes.push({
+          x, y,
+          layer: lIdx,
+          radius: 5,
+          glow: Math.random() * Math.PI
+        });
+      }
+    });
+    
+    nodes.forEach(n1 => {
+      nodes.forEach(n2 => {
+        if(n2.layer === n1.layer + 1) {
+          connections.push({ from: n1, to: n2, weight: Math.random() * 0.5 + 0.5 });
+        }
+      });
+    });
+    
+    let mouse = { x: -1000, y: -1000 };
+    canvas.onmousemove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+    canvas.onmouseleave = () => { mouse.x = -1000; mouse.y = -1000; };
+    
+    canvas.onclick = () => {
+      for(let i=0; i<3; i++) {
+        const startNode = nodes.filter(n => n.layer === 0)[Math.floor(Math.random() * 3)];
+        if(startNode) {
+          injectPulse(startNode);
+        }
+      }
+    };
+    
+    function injectPulse(startNode) {
+      connections.filter(c => c.from === startNode).forEach(c => {
+        particles.push({
+          conn: c,
+          progress: 0,
+          speed: Math.random() * 0.02 + 0.015,
+          color: 'cyan'
+        });
+      });
+    }
+    
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      connections.forEach(c => {
+        ctx.beginPath();
+        ctx.moveTo(c.from.x, c.from.y);
+        ctx.lineTo(c.to.x, c.to.y);
+        ctx.strokeStyle = `rgba(110, 106, 255, ${0.2 * c.weight})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+      
+      for(let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.progress += p.speed;
+        
+        const px = p.conn.from.x + (p.conn.to.x - p.conn.from.x) * p.progress;
+        const py = p.conn.from.y + (p.conn.to.y - p.conn.from.y) * p.progress;
+        
+        ctx.beginPath();
+        ctx.arc(px, py, 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = p.color === 'cyan' ? '#00d2d3' : '#ff9ff3';
+        ctx.fill();
+        
+        if(p.progress >= 1) {
+          const nextConns = connections.filter(c => c.from === p.conn.to);
+          nextConns.forEach(nc => {
+            particles.push({
+              conn: nc,
+              progress: 0,
+              speed: Math.random() * 0.02 + 0.02,
+              color: 'pink'
+            });
+          });
+          particles.splice(i, 1);
+        }
+      }
+      
+      nodes.forEach(n => {
+        n.glow += 0.03;
+        const dist = Math.hypot(n.x - mouse.x, n.y - mouse.y);
+        const isHovered = dist < 22;
+        const radius = isHovered ? n.radius + 3 : n.radius;
+        const glowOpacity = isHovered ? 0.65 : (0.2 + Math.sin(n.glow) * 0.08);
+        
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, radius + 7, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(110, 106, 255, ${glowOpacity})`;
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = isHovered ? '#ffffff' : '#6e6aff';
+        ctx.fill();
+      });
+      
+      if(Math.random() < 0.02) {
+        const inputs = nodes.filter(n => n.layer === 0);
+        const randomInput = inputs[Math.floor(Math.random() * inputs.length)];
+        injectPulse(randomInput);
+      }
+      
+      window.neuralAnimationId = requestAnimationFrame(draw);
+    }
+    
+    draw();
+  };
+
+  window.radarAnimationId = null;
+  
+  window.startRadarScan = function() {
+    const canvas = document.getElementById('radarCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight || 110;
+    
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const maxRadius = Math.min(centerX, centerY) - 8;
+    
+    let angle = 0;
+    const targets = [
+      { angle: 0.5, dist: 0.6, label: "IP.Block.198", life: 0.8 },
+      { angle: 2.1, dist: 0.4, label: "Trojan.Sig", life: 0.5 },
+      { angle: 4.8, dist: 0.8, label: "Port.Scan", life: 1.0 }
+    ];
+    
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, maxRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0, 210, 211, 0.15)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, maxRadius * 0.6, 0, Math.PI * 2);
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, maxRadius * 0.3, 0, Math.PI * 2);
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(centerX - maxRadius, centerY);
+      ctx.lineTo(centerX + maxRadius, centerY);
+      ctx.moveTo(centerX, centerY - maxRadius);
+      ctx.lineTo(centerX, centerY + maxRadius);
+      ctx.strokeStyle = 'rgba(0, 210, 211, 0.08)';
+      ctx.stroke();
+      
+      angle = (angle + 0.015) % (Math.PI * 2);
+      
+      const sweepX = centerX + Math.cos(angle) * maxRadius;
+      const sweepY = centerY + Math.sin(angle) * maxRadius;
+      
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(sweepX, sweepY);
+      ctx.strokeStyle = 'rgba(0, 210, 211, 0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      
+      targets.forEach(t => {
+        let diff = Math.abs(angle - t.angle);
+        if(diff > Math.PI) diff = Math.PI * 2 - diff;
+        
+        let alpha = 0;
+        if(diff < 0.3) {
+          alpha = 1 - (diff / 0.3);
+          t.life = 1.0;
+        } else {
+          t.life = Math.max(0.1, t.life - 0.005);
+          alpha = t.life * 0.3;
+        }
+        
+        const tx = centerX + Math.cos(t.angle) * (maxRadius * t.dist);
+        const ty = centerY + Math.sin(t.angle) * (maxRadius * t.dist);
+        
+        ctx.beginPath();
+        ctx.arc(tx, ty, 4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 71, 87, ${alpha})`;
+        ctx.fill();
+        
+        if(alpha > 0.4) {
+          ctx.font = '8px monospace';
+          ctx.fillStyle = `rgba(0, 210, 211, ${alpha})`;
+          ctx.fillText(t.label, tx + 6, ty - 2);
+        }
+      });
+      
+      if(Math.random() < 0.002) {
+        targets.forEach(t => {
+          t.angle = (t.angle + (Math.random() * 0.4 - 0.2)) % (Math.PI * 2);
+        });
+      }
+      
+      window.radarAnimationId = requestAnimationFrame(draw);
+    }
+    
+    draw();
   };
 
   /* ── Sandbox Actions ── */
