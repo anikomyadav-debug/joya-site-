@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="eIglTIlw7OPvQohGqm8CLw4ijRacw2GImArm7c3PbQU" />
+<meta name="google-site-verification" content="r8K3K1yAi1NDkJ36Ivs0SA_PNLKxbi40nDJRfZnO1Gg" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JOYA Mark XXXIX — Human AI Companion</title>
@@ -2293,18 +2293,40 @@ function openModal(kind){
         desc=document.getElementById("modalDesc"),body=document.getElementById("modalBody");
   body.innerHTML="";
 
-  // Premium users never see a payment screen again
-  if((kind==="buy" || kind==="buy_standard" || kind==="buy_upgrade") && JOYA_ME && JOYA_ME.is_pro && JOYA_ME.plan_type==="premium"){
-    title.textContent="You're already a Pro member ★";
-    desc.textContent="JOYA Pro lifetime is active on your account. No further payment is ever needed.";
-    const dl=document.createElement("a");dl.className="btn btn-primary";dl.href="https://github.com/anikomyadav-debug/joya-site-/releases/download/V1.0.1/JOYA_Setup.exe";dl.setAttribute("download","");
-    dl.textContent="⬇ Download JOYA";body.appendChild(dl);
-    const dl2=document.createElement("a");dl2.className="btn btn-secondary";dl2.href="/JOYA_AI_OS.zip";dl2.setAttribute("download","");
-    dl2.style.marginTop = "10px";
-    dl2.textContent="📦 Download ZIP (Under 25MB)";body.appendChild(dl2);
-    const cl=document.createElement("button");cl.className="btn btn-secondary";
-    cl.style.marginTop = "10px";
-    cl.textContent="Close";cl.onclick=closeModal;body.appendChild(cl);
+  if(kind==="download"){
+    title.textContent="Download JOYA AI OS";
+    desc.textContent="Click below to download the official JOYA Setup launcher directly:";
+    const b1=document.createElement("a");b1.className="btn btn-primary";
+    b1.innerHTML="⬇ Download Launcher (.exe)";
+    b1.href="https://github.com/anikomyadav-debug/joya-site-/releases/download/V1.0.1/JOYA_Setup.exe";
+    b1.setAttribute("download","");
+    body.appendChild(b1);
+    
+    const tipBox = document.createElement("div");
+    tipBox.style.background = "rgba(255, 179, 0, 0.08)";
+    tipBox.style.border = "1px solid rgba(255, 179, 0, 0.25)";
+    tipBox.style.borderRadius = "8px";
+    tipBox.style.padding = "10px 14px";
+    tipBox.style.marginTop = "14px";
+    tipBox.style.textAlign = "left";
+    
+    const tipTitle = document.createElement("h5");
+    tipTitle.style.color = "#ffb300";
+    tipTitle.style.fontSize = "12px";
+    tipTitle.style.fontWeight = "bold";
+    tipTitle.style.margin = "0 0 4px 0";
+    tipTitle.textContent = "⚠️ Windows SmartScreen Notice";
+    tipBox.appendChild(tipTitle);
+    
+    const tipText = document.createElement("p");
+    tipText.style.fontSize = "11px";
+    tipText.style.color = "var(--soft)";
+    tipText.style.margin = "0";
+    tipText.style.lineHeight = "1.4";
+    tipText.innerHTML = "Since the installer is unsigned, Windows may block it. " +
+                       "To install, click <strong>'More Info'</strong> in the blue popup and then click <strong>'Run anyway'</strong>.";
+    tipBox.appendChild(tipText);
+    body.appendChild(tipBox);
     showModal(modal);
     return;
   }
