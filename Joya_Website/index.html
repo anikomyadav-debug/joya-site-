@@ -1767,14 +1767,7 @@ nav.scrolled { border-bottom-color: rgba(124,120,255,.1); box-shadow: 0 4px 24px
 let JOYA_ME = null;
 (function joyaAuthGuard(){
   fetch("/api/me",{cache:"no-store"}).then(r=>r.json()).then(d=>{
-    if(!d || !d.authed){
-      if(d && d.unverified) {
-        location.replace("/verify.html?email=" + encodeURIComponent(d.email));
-      } else {
-        location.replace("/login.html");
-      }
-      return;
-    }
+    if(!d || !d.authed) return;
     JOYA_ME = d;
     const chip=document.getElementById("userChip"),nm=document.getElementById("userName"),
           lo=document.getElementById("navLogout");

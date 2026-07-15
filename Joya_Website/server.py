@@ -739,14 +739,30 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     # ---- API: GET ----
     def _api_get(self, path):
         if path == "/api/me":
-            # Always return a valid guest user (no login required)
+            # Check if real admin is logged in, otherwise return guest (no dashboard)
+            user = self._current_user()
+            if user and user["is_admin"]:
+                return self._send_json({
+                    "authed": True,
+                    "name": user["name"], 
+                    "email": user["email"],
+                    "phone": user.get("phone", ""),
+                    "is_admin": True, 
+                    "is_pro": True,
+                    "created_at": user.get("created_at", ""),
+                    "last_login": user.get("last_login", ""),
+                    "login_count": user.get("login_count", 1),
+                    "order_status": None,
+                    "profile_pic": user.get("profile_pic", "") if hasattr(user, "get") else ""
+                })
+            # Guest user - no admin access, no dashboard
             return self._send_json({
                 "authed": True,
                 "name": "Guest", 
                 "email": "guest@joya.com",
                 "phone": "",
-                "is_admin": True, 
-                "is_pro": True,
+                "is_admin": False, 
+                "is_pro": False,
                 "created_at": "",
                 "last_login": "",
                 "login_count": 1,
