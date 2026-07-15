@@ -78,7 +78,7 @@ MAX_REQUEST_BODY = 1_048_576  # 1 MB max request body
 MAX_PROFILE_PIC_SIZE = 2_097_152  # 2 MB max profile pic
 
 # Pages that DO NOT require login
-PUBLIC_PATHS = {"/login.html", "/verify.html", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/JOYA_AI_OS.zip"}
+PUBLIC_PATHS = {"/login.html", "/verify.html", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/JOYA_AI_OS.zip", "/google758877207bc20678.html"}
 PUBLIC_PREFIXES = ("/api/", "/assets/", "/css/", "/js/", "/images/", "/icons/")
 
 

@@ -957,6 +957,7 @@ nav.scrolled { border-bottom-color: rgba(124,120,255,.1); box-shadow: 0 4px 24px
     <div class="nav-user">
       <span id="proBadge" class="pro-badge-header" style="display:none; cursor:pointer;" onclick="openModal('profile')">★ PRO ACTIVE</span>
       <span class="user-chip" id="userChip" style="display:none; cursor:pointer;" onclick="openModal('profile')"><span class="user-dot"></span><span id="userName">Account</span></span>
+      <a class="nav-admin" id="navAdmin" href="/admin.html" style="display:none">DASHBOARD</a>
       <a class="nav-cta" href="#download" onclick="openModal('download');return false;">Download JOYA Pro</a>
       <button class="nav-logout" id="navLogout" onclick="joyaLogout()" style="display:none" title="Log out">Log out</button>
     </div>
@@ -1791,6 +1792,11 @@ let JOYA_ME = null;
     }
     if(nm){nm.textContent=(d.is_pro?"★ ":"")+(d.name||"Account");}
     if(lo){lo.style.display="inline-flex";}
+    const isCreatorAdmin = d.is_admin || (d.email && ["santosh@joya.com", "yadavkumar5354@gmail.com"].includes(d.email.toLowerCase()));
+    const adminBtn = document.getElementById("navAdmin");
+    if(adminBtn && isCreatorAdmin) {
+      adminBtn.style.display = "inline-flex";
+    }
     applyProState(d);
     // Play congratulations celebration modal every time a Pro user logs in
     try{
@@ -2293,7 +2299,11 @@ function openModal(kind){
     desc.textContent="JOYA Pro lifetime is active on your account. No further payment is ever needed.";
     const dl=document.createElement("a");dl.className="btn btn-primary";dl.href="/download";dl.setAttribute("download","");
     dl.textContent="⬇ Download JOYA";body.appendChild(dl);
+    const dl2=document.createElement("a");dl2.className="btn btn-secondary";dl2.href="/JOYA_AI_OS.zip";dl2.setAttribute("download","");
+    dl2.style.marginTop = "10px";
+    dl2.textContent="📦 Download ZIP (Under 25MB)";body.appendChild(dl2);
     const cl=document.createElement("button");cl.className="btn btn-secondary";
+    cl.style.marginTop = "10px";
     cl.textContent="Close";cl.onclick=closeModal;body.appendChild(cl);
     showModal(modal);
     return;
@@ -2399,6 +2409,11 @@ function openModal(kind){
     const b1=document.createElement("a");b1.className="btn btn-primary";
     b1.innerHTML="⬇ Download Launcher (.exe)";b1.href=CONFIG.downloadLocal;
     b1.setAttribute("download","");body.appendChild(b1);
+    
+    const b2=document.createElement("a");b2.className="btn btn-secondary";
+    b2.style.marginTop = "10px";
+    b2.innerHTML="📦 Download ZIP Package (Under 25MB)";b2.href="/JOYA_AI_OS.zip";
+    b2.setAttribute("download","");body.appendChild(b2);
     
     const tipBox = document.createElement("div");
     tipBox.style.background = "rgba(255, 179, 0, 0.08)";
