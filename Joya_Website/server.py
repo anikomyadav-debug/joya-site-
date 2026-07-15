@@ -967,7 +967,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if data.get("__error") == "Request body too large":
             return self._send_json({"error": "Request body too large. Max 1 MB."}, 413)
 
-         if path == "/api/forgot-password":
+        if path == "/api/forgot-password":
             ip = self._client_ip()
             if rate_limiter.is_rate_limited(ip, "forgot_otp"):
                 log_security_event("FORGOT_PASSWORD_RATE_LIMITED", ip)
@@ -1000,7 +1000,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             send_otp_email(email, otp)
             return self._send_json({"ok": True})
 
-         if path == "/api/reset-password":
+        if path == "/api/reset-password":
             email = sanitize_input(data.get("email") or "", 120).lower().strip()
             code = sanitize_input(data.get("code") or "", 6)
             new_password = data.get("new_password") or ""
