@@ -77,8 +77,8 @@ OTP_EXPIRY_SECONDS = 600  # OTP valid for 10 minutes
 MAX_REQUEST_BODY = 1_048_576  # 1 MB max request body
 MAX_PROFILE_PIC_SIZE = 2_097_152  # 2 MB max profile pic
 
-# Pages that DO NOT require login
-PUBLIC_PATHS = {"/login.html", "/verify.html", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/JOYA_AI_OS.zip", "/google758877207bc20678.html"}
+# ALL pages are public (no login required)
+PUBLIC_PATHS = {"/index.html", "/admin.html", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/google758877207bc20678.html"}
 PUBLIC_PREFIXES = ("/api/", "/assets/", "/css/", "/js/", "/images/", "/icons/")
 
 
@@ -637,6 +637,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if path == "/":
             path = "/index.html"
 
+        # Redirect old login/verify pages to homepage
+        if path in {"/login.html", "/verify.html", "/signup.html"}:
+            return self._redirect("/index.html")
+
         # Serve robots.txt and sitemap.xml
         if path in {"/robots.txt", "/sitemap.xml"}:
             self.path = path
@@ -735,28 +739,19 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     # ---- API: GET ----
     def _api_get(self, path):
         if path == "/api/me":
-            user = self._current_user()
-            if not user:
-                return self._send_json({"authed": False}, 200)
-            if not user["is_admin"] and not user["is_verified"]:
-                return self._send_json({"authed": False, "unverified": True, "email": user["email"]}, 200)
-            with db() as conn:
-                o = conn.execute(
-                    "SELECT status FROM orders WHERE user_id=? ORDER BY id DESC LIMIT 1",
-                    (user["id"],),
-                ).fetchone()
+            # Always return a valid guest user (no login required)
             return self._send_json({
                 "authed": True,
-                "name": user["name"], 
-                "email": user["email"],
-                "phone": user["phone"],
-                "is_admin": bool(user["is_admin"]), 
-                "is_pro": bool(user["is_pro"]),
-                "created_at": user["created_at"],
-                "last_login": user["last_login"],
-                "login_count": user["login_count"],
-                "order_status": (o["status"] if o else None),
-                "profile_pic": user["profile_pic"] if "profile_pic" in user.keys() else ""
+                "name": "Guest", 
+                "email": "guest@joya.com",
+                "phone": "",
+                "is_admin": True, 
+                "is_pro": True,
+                "created_at": "",
+                "last_login": "",
+                "login_count": 1,
+                "order_status": None,
+                "profile_pic": ""
             })
 
         if path == "/api/admin/orders":
