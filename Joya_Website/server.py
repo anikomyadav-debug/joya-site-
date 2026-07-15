@@ -654,9 +654,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             log_security_event("UNAUTHORIZED_ADMIN_ACCESS", self._client_ip(), user["email"])
             return self._redirect("/index.html")
 
-        # Protected installer download
+        # Download redirect to GitHub Release (no local exe hosting)
         if path == "/download":
-            return self._serve_download()
+            return self._redirect("https://github.com/anikomyadav-debug/joya-site-/releases/download/V1.0.1/JOYA_Setup.exe")
 
         self.path = path
         return super().do_GET()
