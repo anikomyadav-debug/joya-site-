@@ -3087,8 +3087,25 @@ startHeroAnimation();
         // Native SpeechSynthesis
         if ('speechSynthesis' in window) {
           const utter = new SpeechSynthesisUtterance(phrase);
-          utter.rate = 1.0;
-          utter.pitch = 1.1;
+          utter.rate = 1.05;
+          utter.pitch = 1.25; // Higher pitch for female voice
+          
+          const voices = window.speechSynthesis.getVoices();
+          // Find standard female voice in Chrome, Edge, Safari
+          const femaleVoice = voices.find(v => 
+            v.name.toLowerCase().includes("zira") || 
+            v.name.toLowerCase().includes("samantha") || 
+            v.name.toLowerCase().includes("hazel") || 
+            v.name.toLowerCase().includes("female") || 
+            v.name.toLowerCase().includes("google uk english female") ||
+            v.name.toLowerCase().includes("google us english") ||
+            v.name.toLowerCase().includes("microsoft zira mobile")
+          ) || voices.find(v => v.lang.startsWith("en"));
+          
+          if (femaleVoice) {
+            utter.voice = femaleVoice;
+          }
+          
           utter.onend = () => {
             eq.style.opacity = "0.3";
             status.textContent = "JOYA CORE : LISTENING (IDLE)";

@@ -71,7 +71,7 @@ if %errorlevel% equ 0 (
 
 :: 4. Create Desktop Shortcut for easy access
 echo Creating Desktop Shortcut...
-powershell -Command "$WshShell = New-Object -ComObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(\"$HOME\Desktop\JOYA AI OS.lnk\"); $Shortcut.TargetPath = \"$PWD\install_and_launch.bat\"; $Shortcut.WorkingDirectory = \"$PWD\"; $Shortcut.IconLocation = \"$PWD\website\assets\favicon.ico\"; $Shortcut.Save()"
+powershell -Command "$WshShell = New-Object -ComObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(\"$HOME\Desktop\JOYA AI OS.lnk\"); $Shortcut.TargetPath = \"$PWD\install_and_launch.bat\"; $Shortcut.WorkingDirectory = \"$PWD\"; $Shortcut.IconLocation = \"$PWD\assets\app_logo.ico\"; $Shortcut.Save()"
 
 :: 5. Launch the application
 echo [3/3] Launching JOYA AI OS...
