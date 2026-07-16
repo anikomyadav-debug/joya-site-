@@ -1,0 +1,15 @@
+# JOYA Website — Requirements
+# The server uses only Python standard library (no external dependencies).
+# These are listed for deployment platform compatibility.
+
+# Core (all standard library — no pip install needed)
+# http.server
+# sqlite3
+# hashlib
+# secrets
+# gzip
+# json
+# urllib
+
+# Optional: for production WSGI deployment
+gunicorn>=21.2.0
