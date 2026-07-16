@@ -298,6 +298,21 @@
     <div class="progress-bar-container">
       <div class="progress-fill" id="progressFill"></div>
     </div>
+    <button class="btn-control" style="margin-top: 15px; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;" onclick="toggleAddCardForm()">➕ Add New Card</button>
+  </div>
+
+  <!-- Add Card Form -->
+  <div id="addCardForm" style="display:none; width:min(90vw, 580px); background:rgba(20,20,30,0.85); border:1px solid rgba(255,255,255,0.08); border-radius:18px; padding:20px; margin-bottom:20px; z-index:10; box-shadow:0 10px 40px rgba(0,0,0,0.5); backdrop-filter:blur(30px);">
+    <h3 style="margin-top:0; color:#fff; font-size:1.1rem; font-weight:600; margin-bottom:12px;">Create New Flashcard</h3>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <input type="text" id="newTopic" placeholder="Topic (e.g. Physics, History)" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; color:#fff; outline:none; font-size:0.9rem;">
+      <input type="text" id="newQuestion" placeholder="Question" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; color:#fff; outline:none; font-size:0.9rem;">
+      <textarea id="newAnswer" placeholder="Answer" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; color:#fff; outline:none; font-size:0.9rem; min-height:80px; resize:vertical;"></textarea>
+      <div style="display:flex; gap:10px; margin-top:5px;">
+        <button class="btn-control" style="flex:1; border-radius:10px; padding:10px;" onclick="saveFlashcard()">Save Card</button>
+        <button class="btn-control" style="flex:1; border-radius:10px; padding:10px; border-color:rgba(255,55,95,0.3); color:#ff375f; background:rgba(255,55,95,0.05);" onclick="toggleAddCardForm()">Cancel</button>
+      </div>
+    </div>
   </div>
 
   <div class="scene" id="scene">
@@ -493,6 +508,57 @@
         prevCard();
       }
     });
+
+    function toggleAddCardForm() {
+      const form = document.getElementById('addCardForm');
+      if (form.style.display === 'none') {
+        form.style.display = 'block';
+        document.getElementById('newTopic').focus();
+      } else {
+        form.style.display = 'none';
+      }
+    }
+
+    async function saveFlashcard() {
+      const topic = document.getElementById('newTopic').value.trim();
+      const question = document.getElementById('newQuestion').value.trim();
+      const answer = document.getElementById('newAnswer').value.trim();
+      
+      if (!question || !answer) {
+        alert("Question and Answer cannot be empty!");
+        return;
+      }
+      
+      try {
+        const res = await fetch('/api/flashcards', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic: topic || 'General',
+            question: question,
+            answer: answer
+          })
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          cards = data.cards;
+          toggleAddCardForm();
+          // Reset inputs
+          document.getElementById('newTopic').value = '';
+          document.getElementById('newQuestion').value = '';
+          document.getElementById('newAnswer').value = '';
+          
+          currentIndex = cards.length - 1; // go to the newly added card
+          restartDeck();
+          showToast("🎉 Flashcard added!");
+        } else {
+          alert("Failed to save flashcard on server.");
+        }
+      } catch (e) {
+        alert("Connection error: Failed to save card.");
+      }
+    }
 
     window.onload = loadFlashcards;
   </script>

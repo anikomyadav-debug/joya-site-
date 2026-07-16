@@ -981,6 +981,141 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if data.get("__error") == "Request body too large":
             return self._send_json({"error": "Request body too large. Max 1 MB."}, 413)
 
+        if path == "/api/notes":
+            try:
+                mpath = os.path.join(os.path.dirname(HERE), "memory", "study_data.json")
+                os.makedirs(os.path.dirname(mpath), exist_ok=True)
+                sdata = {}
+                if os.path.exists(mpath):
+                    with open(mpath, "r", encoding="utf-8") as f:
+                        try: sdata = json.load(f)
+                        except Exception: pass
+                sdata["notes"] = {
+                    "topic": data.get("topic", "AI Study Notes"),
+                    "content": data.get("content", ""),
+                    "created": data.get("created", "")
+                }
+                with open(mpath, "w", encoding="utf-8") as f:
+                    json.dump(sdata, f, indent=4, ensure_ascii=False)
+                return self._send_json({"ok": True, "notes": sdata["notes"]})
+            except Exception as e:
+                return self._send_json({"error": str(e)}, 500)
+
+        if path == "/api/flashcards":
+            try:
+                mpath = os.path.join(os.path.dirname(HERE), "memory", "study_data.json")
+                os.makedirs(os.path.dirname(mpath), exist_ok=True)
+                sdata = {}
+                if os.path.exists(mpath):
+                    with open(mpath, "r", encoding="utf-8") as f:
+                        try: sdata = json.load(f)
+                        except Exception: pass
+                cards = sdata.get("flashcards", [])
+                new_card = {
+                    "id": len(cards) + 1,
+                    "topic": data.get("topic", "General"),
+                    "question": data.get("question", ""),
+                    "answer": data.get("answer", "")
+                }
+                cards.append(new_card)
+                sdata["flashcards"] = cards
+                with open(mpath, "w", encoding="utf-8") as f:
+                    json.dump(sdata, f, indent=4, ensure_ascii=False)
+                return self._send_json({"ok": True, "card": new_card, "cards": cards})
+            except Exception as e:
+                return self._send_json({"error": str(e)}, 500)
+
+        if path == "/api/youtube-summarize":
+            try:
+                url = data.get("url", "").strip()
+                if not url:
+                    return self._send_json({"error": "YouTube URL is required"}, 400)
+                
+                # Extract YouTube Video ID
+                match = re.search(r"(?:v=|\/)([0-9A-Za-z_-]{11}).*", url)
+                if not match:
+                    return self._send_json({"error": "Invalid YouTube URL format"}, 400)
+                video_id = match.group(1)
+                
+                # Fetch video page metadata
+                import urllib.request
+                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+                req = urllib.request.Request(f"https://www.youtube.com/watch?v={video_id}", headers=headers)
+                
+                try:
+                    with urllib.request.urlopen(req) as response:
+                        html = response.read().decode('utf-8', errors='ignore')
+                except Exception as ex:
+                    return self._send_json({"error": f"Failed to fetch YouTube page: {ex}"}, 500)
+                
+                title_match = re.search(r"<title>(.*?)</title>", html)
+                desc_match = re.search(r"\"shortDescription\":\"(.*?)\"", html)
+                if not desc_match:
+                    desc_match = re.search(r"<meta name=\"description\" content=\"(.*?)\"", html)
+                    
+                title = title_match.group(1).replace(" - YouTube", "") if title_match else "YouTube Video"
+                desc = desc_match.group(1).replace("\\n", "\n") if desc_match else ""
+                
+                # Call Gemini API
+                import google.generativeai as genai
+                key = os.environ.get("GEMINI_API_KEY", "")
+                if key:
+                    genai.configure(api_key=key)
+                
+                prompt = f"""You are an expert AI study companion. Summarize this YouTube video based on its title and description:
+Video Title: {title}
+Video Description: {desc}
+
+Provide a well-structured summary containing:
+1. Core Concept & Goal of the video.
+2. Key Takeaways & Bullet Points.
+3. Useful study tips based on this content.
+
+Write in a clean, professional, educational tone."""
+                
+                model = genai.GenerativeModel("gemini-2.5-flash")
+                resp = model.generate_content(prompt)
+                summary = resp.text.strip()
+                
+                return self._send_json({
+                    "ok": True,
+                    "title": title,
+                    "video_id": video_id,
+                    "summary": summary
+                })
+            except Exception as e:
+                return self._send_json({"error": str(e)}, 500)
+
+        if path == "/api/ocr-handwriting":
+            try:
+                img_data = data.get("image", "")
+                if not img_data:
+                    return self._send_json({"error": "Image data is required"}, 400)
+                
+                import base64
+                if "," in img_data:
+                    img_data = img_data.split(",")[1]
+                img_bytes = base64.b64decode(img_data)
+                
+                import google.generativeai as genai
+                key = os.environ.get("GEMINI_API_KEY", "")
+                if key:
+                    genai.configure(api_key=key)
+                
+                image_parts = [{"mime_type": "image/png", "data": img_bytes}]
+                prompt = """Analyze this handwritten note or drawing image. 
+Extract all readable text, formulas, and diagrams. 
+Format the result cleanly in markdown style so it can be used as a study note. 
+Do not include any greeting or conversational text, just the extracted markdown notes."""
+                
+                model = genai.GenerativeModel("gemini-2.5-flash")
+                resp = model.generate_content([image_parts[0], prompt])
+                markdown_result = resp.text.strip()
+                
+                return self._send_json({"ok": True, "notes": markdown_result})
+            except Exception as e:
+                return self._send_json({"error": str(e)}, 500)
+
         if path == "/api/forgot-password":
             ip = self._client_ip()
             if rate_limiter.is_rate_limited(ip, "forgot_otp"):
